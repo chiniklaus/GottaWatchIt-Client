@@ -32,4 +32,5 @@ have to import router in navbar, otherwise the link doesn't work
     <li> - [ ] user be able to follow other users</li>
     <li> - [ ] recommendation portfolio editor</li>
     <li> - [ ] usesr be able to move liked movie around</li>
+    <li> - [ ] all the buttons in moviedetail page take you to login if you are not logged in</li>
 </ul>

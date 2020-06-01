@@ -74,8 +74,16 @@ class MovieDetail
     }
 
     async addComment() {
+        var date = new Date().toLocaleDateString()
+        console.log(date)
         await this.actionService
-            .addComment(this.state.movie.Title, this.state.movie.imdbID, this.state.currentUser.id, this.state.myComment, this.state.currentUser.username)
+            .addComment(this.state.movie.Title,
+                        this.state.movie.imdbID,
+                        this.state.currentUser.id,
+                        this.state.myComment,
+                        this.state.currentUser.username,
+                        date
+                        )
         this.handleRatingClose()
         this.setState({myComment : ''})
     }
@@ -251,11 +259,11 @@ class MovieDetail
                     <div className="col-4"></div>
                     <div className="col-6 mt-4">
                         <h2>Comments</h2>
-                        <div className="container-fluid  border-top">
+                        <div className="container-fluid  border-top pl-0 pr-0">
                             {                                    
                                 this.state.comments.map(
                                     comment =>
-                                            <Comment username={comment.userName} comment={comment.comment} key={comment.id}/>
+                                            <Comment username={comment.userName} comment={comment.comment} date={comment.date} key={comment.id}/>
                             )}
                         </div>
                     </div>

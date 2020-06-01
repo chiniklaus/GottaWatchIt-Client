@@ -20,11 +20,11 @@ export default class ActionService {
         await promise
     }
 
-    async addComment(name, imdbid, uid, comment, username) {
+    async addComment(name, imdbid, uid, comment, username, date) {
         let promise = 
             fetch(`http://localhost:8080/api/action/comment/${imdbid}/${uid}`, {
             method: 'PUT',
-            body: JSON.stringify([comment, name, username]),
+            body: JSON.stringify([comment, name, username, date]),
             headers: {
                 'content-type': 'application/json'
             }

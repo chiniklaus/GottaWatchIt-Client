@@ -19,7 +19,7 @@ export default class SearchService {
 
     async searchMovieByID(id) {
         var movie
-        let promise = fetch(`https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?apikey=5d6e84fa&i=${id}`)
+        let promise = fetch(`http://www.omdbapi.com/?apikey=5d6e84fa&i=${id}`)
             .then(response => response.json())
             .then(result => { movie = result })
         await promise
