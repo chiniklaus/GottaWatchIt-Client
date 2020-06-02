@@ -1,11 +1,13 @@
 import React from 'react'
 import { MDBNav, MDBNavItem, MDBNavLink, MDBIcon } from "mdbreact";
 import {Button, Modal} from 'react-bootstrap'
+import Avatar from 'react-avatar-edit'
 import AccountUpdateService from "../services/AccountUpdateService";
 import LoginService from "../services/LoginService";
 import SearchService from "../services/SearchService";
 import ProfileMovies from "./ProfileMovies"
 import Friends from "./Friends"
+import i from '../1.jpeg'
 
 class Profile
     extends React.Component {
@@ -24,7 +26,9 @@ class Profile
             newPassword: '',
             confirmPassword: '',
             loggedIn: false,
-            tab: ''
+            tab: '',
+            preview: null,
+            src: i
         }
         this.navigate = this.navigate.bind(this)
         this.getCurrentUser = this.getCurrentUser.bind(this)
@@ -33,6 +37,8 @@ class Profile
         this.handleWarningShow = this.handleWarningShow.bind(this)
         this.handleWarningClose = this.handleWarningClose.bind(this)
         this.editAccount = this.editAccount.bind(this)
+        this.onCrop = this.onCrop.bind(this)
+        this.onClose = this.onClose.bind(this)
     }
 
     async getCurrentUser() {
@@ -124,6 +130,20 @@ class Profile
         this.setState({confirmPassword: value})
     }
 
+    onClose() {
+        this.setState({preview: null})
+    }
+      
+    onCrop(preview) {
+        this.setState({preview})
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if(prevState.currentUser.username !== window.location.pathname.split('/')[2]) {
+            this.getCurrentUser()
+        }
+    }
+
     render() {
         return (
             <div>
@@ -163,12 +183,21 @@ class Profile
                     </MDBNav>
                 </div>
                 <Modal show={this.state.show} 
+                             size="lg"
                              onHide={this.handleClose} 
                              aria-labelledby="contained-modal-title-vcenter" centered>
                          <Modal.Header closeButton>
                          <Modal.Title>Update your account</Modal.Title>
                          </Modal.Header>
                          <Modal.Body>
+                            <Avatar
+                                width={390}
+                                height={295}
+                                onCrop={this.onCrop}
+                                onClose={this.onClose}
+                                src={this.state.src}
+                            />
+                            <img src={this.state.preview} alt="Preview" />
                              <h5>New username:</h5>
                              <div className="form-group">
                                      <input className="form-control"

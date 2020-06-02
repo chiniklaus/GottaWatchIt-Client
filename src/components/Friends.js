@@ -45,32 +45,47 @@ class Friends
     render() {
         return (
             <div>
-                {console.log(this.props)}
-                <div className="container">
-                    <div className="row border-bottom">
-                        <h3>friend requests</h3>
+                <div className="container pt-2 pl-4 pr-4">
+                    <div className="row">
+                        <h3 className="pl-3 pt-2">friend requests</h3>
+                    </div>
+                    <div className="row border-bottom pb-1">
                         {                                    
                            this.state.rec.map(
                             re =>
-                                  <p>{re}</p>
+                                  <p className="mr-5">{re}</p>
                             )
                         }
+                        {
+                            this.state.rec.length == 0 &&
+                            <h4 className="pl-3 pt-2">
+                                <strong>
+                                    you have no friend requests
+                                </strong>
+                            </h4>
+                        }
                     </div>
-                    <div className="row border-bottom">
-                        <h3>sent requests</h3>
+
+                    <div className="row">
+                        <h3 className="pl-3 pt-2">sent requests</h3>    
+                    </div>
+                    <div className="row border-bottom pl-3">
                         {                                    
                            this.state.req.map(
                             re =>
-                                  <p>{re}</p>
+                                  <p className="mr-5">{re}</p>
                             )
                         }
                     </div>
-                    <div className="row border-bottom">
-                        <h3>friends</h3>
+                    
+                    <div className="row">
+                        <h3 className="pl-3 pt-2">friends</h3>
+                    </div>
+                    <div className="row border-bottom pl-3">
                         {                                    
                            this.state.valid.map(
                             re =>
-                                  <p>{re}</p>
+                                  <p className="mr-3">{re}</p>
                             )
                         }
                     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import SearchService from "../services/SearchService";
+import LoginService from "../services/LoginService";
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 
 export default class SearchResult
@@ -8,12 +9,15 @@ export default class SearchResult
     constructor(props) {
         super(props);
         this.searchService = SearchService.getInstance();
+        this.loginService = LoginService.getInstance();
         this.state = {
             searchResult: {},
             movies: [],
-            error: false
+            error: false,
+            userResult: {}
         }
         this.searchMovie = this.searchMovie.bind(this)
+        this.searchUser = this.searchUser.bind(this)
     }
 
     async searchMovie(keyword) {
@@ -32,15 +36,24 @@ export default class SearchResult
         }
     }
 
+    async searchUser(keyword) {
+        var userResult = await this.loginService.getUser(keyword)
+        this.setState({
+            userResult: userResult
+        })
+    }
+
     componentDidMount() {
         var keyword = window.location.pathname.split('/')[2]
         this.searchMovie(keyword)
+        this.searchUser(keyword)
     }
 
     componentDidUpdate(prevProps, prevState){
         if(prevProps.location.pathname.split('/')[2] !== this.props.match.params.keyword) {
             this.setState({error: false})
             this.searchMovie(this.props.match.params.keyword);
+            this.searchUser(this.props.match.params.keyword)
         }
     }
     
@@ -48,7 +61,7 @@ export default class SearchResult
         return (
             <div>
                 <div className="container mt-3">
-                    <h2>Search Results:</h2>
+                    <h2>Movie Search Results:</h2>
                 </div>
                 <div className="container mt-3">
                     {this.state.error && 
@@ -70,6 +83,21 @@ export default class SearchResult
                             }
                         </ul>
                     }
+                </div>
+                <div className="container mt-3">
+                    <h2>User Search Results:</h2>
+                </div>
+                <div className="container mt-3">
+                        <ul className="list-group">
+                            {
+                                this.state.userResult.id != -1 &&
+                                <li key='userResult' className="list-group-item">
+                                    <Link to={`/profile/${this.state.userResult.username}`}>
+                                        {this.state.userResult.username}
+                                    </Link>
+                                </li>
+                            }
+                        </ul>
                 </div>
             </div>
         )

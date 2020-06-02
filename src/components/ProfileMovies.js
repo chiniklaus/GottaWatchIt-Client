@@ -12,15 +12,15 @@ class ProfileMovies
         return (
             <div>
                 <div className="row">
-                    <div className="col-2"></div>
-                    <div className="col-8 container-fluid pt-4 pb-3">
+                    <div className="col-1"></div>
+                    <div className="col-10 container-fluid pt-4 pb-3">
                         <div>
                             <h2 className="text-center font-weight-bold">
                                 favorite movie
                             </h2>
                         </div>
                     </div>
-                    <div className="col-2"></div>
+                    <div className="col-1"></div>
                 </div>
                 <div className="container-fluid mt-2">
                     <div className="row">
