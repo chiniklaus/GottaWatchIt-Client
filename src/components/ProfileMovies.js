@@ -11,9 +11,9 @@ class ProfileMovies
     render() {
         return (
             <div>
-                {/* <div className="row">
+                <div className="row">
                     <div className="col-2"></div>
-                    <div className="col-8 container-fluid pt-3 border-top">
+                    <div className="col-8 container-fluid pt-4 pb-3">
                         <div>
                             <h2 className="text-center font-weight-bold">
                                 favorite movie
@@ -54,7 +54,7 @@ class ProfileMovies
                         </div>
                     </div>
                     <div className="col-2"></div>
-                </div> */}
+                </div>
             </div>
         )
     }

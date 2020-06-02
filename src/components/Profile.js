@@ -1,11 +1,9 @@
 import React from 'react'
-import { MDBIcon } from "mdbreact";
-import {Button, Modal} from 'react-bootstrap'
+import { MDBNav, MDBNavItem, MDBNavLink, MDBIcon } from "mdbreact";
 import AccountUpdateService from "../services/AccountUpdateService";
 import LoginService from "../services/LoginService";
 import SearchService from "../services/SearchService";
-import ProfileLikeMovie from "./ProfileLikeMovie";
-import ProfileFavoriteMovie from './ProfileFavoriteMovie'
+import ProfileMovies from "./ProfileMovies"
 
 class Profile
     extends React.Component {
@@ -23,7 +21,8 @@ class Profile
             newUsername: '',
             newPassword: '',
             confirmPassword: '',
-            loggedIn: false
+            loggedIn: false,
+            tab: ''
         }
         this.navigate = this.navigate.bind(this)
         this.getCurrentUser = this.getCurrentUser.bind(this)
@@ -51,7 +50,6 @@ class Profile
                     this.setState({favoriteMovieObject: searchResult})
                 }
         } else {
-            console.log('here')
             var user = await this.loginService.getUser(owner)
             this.setState({
                 currentUser: user,
@@ -145,106 +143,30 @@ class Profile
                         {this.state.currentUser.type}
                     </h5>}
                 </div>
-                <div className="row">
-                    <div className="col-2"></div>
-                    <div className="col-8 container-fluid pt-3 border-top">
-                        <div>
-                            <h2 className="text-center font-weight-bold">
-                                favorite movie
-                            </h2>
-                        </div>
-                    </div>
-                    <div className="col-2"></div>
-                </div>
-                <div className="container-fluid mt-2">
-                    <div className="row">
-                        <div className="col-2"></div>
-                        <div className="col-8 mb-5">
-                            <ProfileFavoriteMovie favorite={this.state.favorite} nav={this.navigate} favoriteMovieObject={this.state.favoriteMovieObject} />
-                        </div>
-                        <div className="col-2"></div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-2"></div>
-                    <div className="col-8 container-fluid pt-3 border-top">
-                        <div>
-                            <h2 className="text-center font-weight-bold">
-                                the movies you liked
-                            </h2>
-                        </div>
-                    </div>
-                    <div className="col-2"></div>
-                </div>
-                <div className="row">
-                    <div className="col-2"></div>
-                    <div className="col-8">
-                        <div className="container-fluid row">
-                                    {                                    
-                                    this.state.likes.map(
-                                        like =>
-                                            <ProfileLikeMovie key={like.movieName} like={like} nav={this.navigate} getCurrentUser={this.getCurrentUser}/>
-                                    )}
-                        </div>
-                    </div>
-                    <div className="col-2"></div>
+                <div className="container">
+                    <MDBNav className="nav-tabs nav-fill">
+                        <MDBNavItem>
+                            <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/movies'}
+                                        onClick={() => this.setState({tab: 'movies'})}><strong>Movies</strong></MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/friends'}
+                                        onClick={() => this.setState({tab: 'friends'})}><strong>Friends</strong></MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/activity'}
+                                        onClick={() => this.setState({tab: 'activity'})}><strong>Activities</strong></MDBNavLink>
+                        </MDBNavItem>
+                    </MDBNav>
                 </div>
 
-                    <Modal show={this.state.show} 
-                            onHide={this.handleClose} 
-                            aria-labelledby="contained-modal-title-vcenter" centered>
-                        <Modal.Header closeButton>
-                        <Modal.Title>Update your account</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <h5>New username:</h5>
-                            <div className="form-group">
-                                    <input className="form-control"
-                                   id="usernameFld"
-                                   placeholder="username"
-                                   onChange={e => this.setUsername(e)}/>
-                            </div>
-                            <h5>New password:</h5>
-                            <h5>(leave this blank to keep old password)</h5>
-                            <div className="form-group">
-                                    <input 
-                                    type="password"
-                                    className="form-control"
-                                   id="usernameFld"
-                                   placeholder="new password"
-                                   onChange={e => this.setPassword(e)}/>
-                            </div>
-                            <h5>Confirm password:</h5>
-                            <div className="form-group">
-                                    <input 
-                                    type="password"
-                                    className="form-control"
-                                   id="usernameFld"
-                                   placeholder="confirm password"
-                                   onChange={e => this.confirmPassword(e)}/>
-                            </div>
-                        </Modal.Body>
-                        <Modal.Footer>
-                        <Button variant="danger" onClick={this.editAccount}>
-                            Save
-                        </Button>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            Close
-                        </Button>
-                        </Modal.Footer>
-                    </Modal>
-
-                    <Modal show={this.state.showWarning} onHide={this.handleWarningClose}>
-                        <Modal.Header closeButton>
-                        <Modal.Title>Error</Modal.Title>
-                        </Modal.Header>
-                                    <Modal.Body>'confirm password does not match.'</Modal.Body>
-                        <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleWarningClose}>
-                            Close
-                        </Button>
-                        </Modal.Footer>
-                    </Modal>
+                {this.state.tab == 'movies' &&
+                    <ProfileMovies favorite={this.state.favorite} 
+                                    navigate={this.navigate} 
+                                    favoriteMovieObject={this.state.favoriteMovieObject}
+                                    likes={this.state.likes}
+                                    getCurrentUser={this.getCurrentUser}/>
+                }
             </div>
         )
     }

@@ -44,7 +44,6 @@ export default class Homepage extends React.Component {
         return(
             //<div style={{backgroundImage: 'url(images/1.jpg)' }}>
             <div>
-                {console.log(this.state)}
                 <Router>
                     <Route path='/' render={() => <NavBar status={this.state.login} username={this.state.username}/>} />
 
@@ -79,7 +78,7 @@ export default class Homepage extends React.Component {
                     <Route exact path="/search/detail/:id" 
                                     render={() => <MovieDetail />}/>
                     
-                    <Route path="/profile/:username" render={() => <Profile username={this.state.username} />}/>
+                    <Route path="/profile/:username" render={(props) => <Profile {...props} username={this.state.username} />}/>
                
                 </Router>
             </div>
