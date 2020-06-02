@@ -2,7 +2,7 @@ import React from 'react'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 import { withRouter } from "react-router-dom"
 import {Button} from 'react-bootstrap'
-import LoginService from "../services/LoginService";
+import LoginService from "../../services/LoginService";
 
 class Login
     extends React.Component {

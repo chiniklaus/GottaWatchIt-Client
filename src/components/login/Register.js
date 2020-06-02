@@ -1,6 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
-import LoginService from "../services/LoginService";
+import LoginService from "../../services/LoginService";
 import Button from "react-bootstrap/Button";
 import { withRouter } from "react-router-dom"
 

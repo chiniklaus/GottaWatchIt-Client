@@ -1,7 +1,7 @@
 import React from 'react'
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 import {Navbar, Nav, Form, FormControl, Button} from 'react-bootstrap'
-import LoginService from "../services/LoginService";
+import LoginService from "../../services/LoginService";
 
 export default class NavBar extends React.Component {
     constructor(props) {

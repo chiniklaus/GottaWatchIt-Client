@@ -1,15 +1,15 @@
 import React from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import SearchResult from "./SearchResult";
-import MovieDetail from "./MovieDetail";
-import Login from "./Login";
-import Register from "./Register";
-import RegisterSuccessfulNotification from "./RegisterSuccessfulNotification";
-import LoginFailed from "./LoginFailed";
-import RegisterFailedNotification from "./RegisterFailedNotification";
-import UserAlreadyExist from "./UserAlreadyExist";
-import Profile from "./Profile";
-import NavBar from "./NavBar"
+import SearchResult from "./search/SearchResult";
+import MovieDetail from "./movie/MovieDetail";
+import Login from "./login/Login";
+import Register from "./login/Register";
+import RegisterSuccessfulNotification from "./login/RegisterSuccessfulNotification";
+import LoginFailed from "./login/LoginFailed";
+import RegisterFailedNotification from "./login/RegisterFailedNotification";
+import UserAlreadyExist from "./login/UserAlreadyExist";
+import Profile from "./profile/Profile";
+import NavBar from "./login/NavBar"
 import bgv from '../1.mp4';
 import { MDBMask, MDBView } from "mdbreact";
 

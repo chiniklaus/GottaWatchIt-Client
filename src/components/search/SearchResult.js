@@ -1,6 +1,6 @@
 import React from "react";
-import SearchService from "../services/SearchService";
-import LoginService from "../services/LoginService";
+import SearchService from "../../services/SearchService";
+import LoginService from "../../services/LoginService";
 import {BrowserRouter as Router, Link} from 'react-router-dom'
 
 export default class SearchResult
@@ -84,7 +84,7 @@ export default class SearchResult
                         </ul>
                     }
                 </div>
-                <div className="container mt-3">
+                <div className="container mt-5 pt-5">
                     <h2>User Search Results:</h2>
                 </div>
                 <div className="container mt-3">

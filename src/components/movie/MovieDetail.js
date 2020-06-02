@@ -1,11 +1,11 @@
 import React from 'react'
 import {Button, Modal} from 'react-bootstrap'
 import Comment from "./Comment";
-import SearchService from "../services/SearchService";
-import AccountUpdateService from "../services/AccountUpdateService";
-import LoginService from "../services/LoginService";
-import ActionService from "../services/ActionService";
-import MovieService from "../services/MovieService";
+import SearchService from "../../services/SearchService";
+import AccountUpdateService from "../../services/AccountUpdateService";
+import LoginService from "../../services/LoginService";
+import ActionService from "../../services/ActionService";
+import MovieService from "../../services/MovieService";
 
 class MovieDetail
     extends React.Component {

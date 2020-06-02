@@ -1,6 +1,6 @@
 import React from 'react'
 import { MDBMask, MDBView, MDBIcon } from "mdbreact";
-import AccountUpdateService from "../services/AccountUpdateService";
+import AccountUpdateService from "../../services/AccountUpdateService";
 
 class ProfileFavoriteMovie
     extends React.Component {

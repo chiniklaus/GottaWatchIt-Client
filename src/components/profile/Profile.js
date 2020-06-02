@@ -2,12 +2,12 @@ import React from 'react'
 import { MDBNav, MDBNavItem, MDBNavLink, MDBIcon } from "mdbreact";
 import {Button, Modal} from 'react-bootstrap'
 import Avatar from 'react-avatar-edit'
-import AccountUpdateService from "../services/AccountUpdateService";
-import LoginService from "../services/LoginService";
-import SearchService from "../services/SearchService";
+import AccountUpdateService from "../../services/AccountUpdateService";
+import LoginService from "../../services/LoginService";
+import SearchService from "../../services/SearchService";
 import ProfileMovies from "./ProfileMovies"
 import Friends from "./Friends"
-import i from '../1.jpeg'
+import i from '../../1.jpeg'
 
 class Profile
     extends React.Component {
