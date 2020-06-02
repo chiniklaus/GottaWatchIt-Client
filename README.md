@@ -28,7 +28,7 @@ have to import router in navbar, otherwise the link doesn't work
     <li> - [x] user be able to change username</li>
     <li> - [x] different pages for search result</li>
     <li> - [x] comment timestamp</li>
-    <li> - [ ] changing profile route to username</li>
+    <li> - [x] changing profile route to username</li>
     <li> - [ ] user be able to add friends</li>
     <li> - [ ] user be able to upload profile picture</li>
     <li> - [ ] user be able to search users in search bar</li>

@@ -1,9 +1,11 @@
 import React from 'react'
 import { MDBNav, MDBNavItem, MDBNavLink, MDBIcon } from "mdbreact";
+import {Button, Modal} from 'react-bootstrap'
 import AccountUpdateService from "../services/AccountUpdateService";
 import LoginService from "../services/LoginService";
 import SearchService from "../services/SearchService";
 import ProfileMovies from "./ProfileMovies"
+import Friends from "./Friends"
 
 class Profile
     extends React.Component {
@@ -96,11 +98,11 @@ class Profile
             this.handleClose()
             this.handleWarningShow()
         } else {
-            if (this.state.newUsername !== '') {
-                await this.accountUpdateService.updateUsername(this.state.newUsername, this.state.currentUser.username)
-            }
             if (this.state.newPassword !== '') {
                 await this.accountUpdateService.updatePassword(this.state.newPassword, this.state.currentUser.username)
+            }
+            if (this.state.newUsername !== '') {
+                await this.accountUpdateService.updateUsername(this.state.newUsername, this.state.currentUser.username)
             }
             await this.loginService.logout()
             this.props.history.push('/login')
@@ -125,6 +127,7 @@ class Profile
     render() {
         return (
             <div>
+                {console.log(this.state)}
                 <div className="container-fluid mt-5 mb-5">
                     <div className="row row-cols-3">
                         <div className="col"></div>
@@ -159,13 +162,71 @@ class Profile
                         </MDBNavItem>
                     </MDBNav>
                 </div>
+                <Modal show={this.state.show} 
+                             onHide={this.handleClose} 
+                             aria-labelledby="contained-modal-title-vcenter" centered>
+                         <Modal.Header closeButton>
+                         <Modal.Title>Update your account</Modal.Title>
+                         </Modal.Header>
+                         <Modal.Body>
+                             <h5>New username:</h5>
+                             <div className="form-group">
+                                     <input className="form-control"
+                                    id="usernameFld"
+                                    placeholder="username"
+                                    onChange={e => this.setUsername(e)}/>
+                             </div>
+                             <h5>New password:</h5>
+                             <h5>(leave this blank to keep old password)</h5>
+                             <div className="form-group">
+                                     <input 
+                                     type="password"
+                                     className="form-control"
+                                    id="usernameFld"
+                                    placeholder="new password"
+                                    onChange={e => this.setPassword(e)}/>
+                             </div>
+                             <h5>Confirm password:</h5>
+                             <div className="form-group">
+                                     <input 
+                                     type="password"
+                                     className="form-control"
+                                    id="usernameFld"
+                                    placeholder="confirm password"
+                                    onChange={e => this.confirmPassword(e)}/>
+                             </div>
+                         </Modal.Body>
+                         <Modal.Footer>
+                         <Button variant="danger" onClick={this.editAccount}>
+                             Save
+                         </Button>
+                         <Button variant="secondary" onClick={this.handleClose}>
+                             Close
+                         </Button>
+                         </Modal.Footer>
+                     </Modal>
 
+                     <Modal show={this.state.showWarning} onHide={this.handleWarningClose}>
+                         <Modal.Header closeButton>
+                         <Modal.Title>Error</Modal.Title>
+                         </Modal.Header>
+                                     <Modal.Body>'confirm password does not match.'</Modal.Body>
+                         <Modal.Footer>
+                         <Button variant="secondary" onClick={this.handleWarningClose}>
+                             Close
+                         </Button>
+                         </Modal.Footer>
+                     </Modal>
                 {this.state.tab == 'movies' &&
                     <ProfileMovies favorite={this.state.favorite} 
                                     navigate={this.navigate} 
                                     favoriteMovieObject={this.state.favoriteMovieObject}
                                     likes={this.state.likes}
                                     getCurrentUser={this.getCurrentUser}/>
+                }
+                {this.state.tab == 'friends' &&
+                    <Friends received={this.state.currentUser.received}
+                                requested={this.state.currentUser.requested}/>
                 }
             </div>
         )

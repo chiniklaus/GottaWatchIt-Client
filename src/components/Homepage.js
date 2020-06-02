@@ -50,7 +50,7 @@ export default class Homepage extends React.Component {
                     <Route exact path='/' render={() => 
                                 <MDBView hover>
                                     <video autoPlay muted loop>
-                                        <source src={bgv} type="video/mp4" resizeMode="cover"/>
+                                        <source src={bgv} type="video/mp4"/>
                                         <h1>marvel sucks!</h1>
                                     </video>
                                     <MDBMask className="flex-center" overlay="black-strong">
