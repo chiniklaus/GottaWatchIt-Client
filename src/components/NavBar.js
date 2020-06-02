@@ -34,7 +34,7 @@ export default class NavBar extends React.Component {
                         <Navbar.Collapse id="basic-navbar-nav">
                             {this.props.status &&
                                 <Nav className="mr-auto">
-                                    <Link className="nav-link" to="/profile" style={{color: 'white'}}>
+                                    <Link className="nav-link" to={'/profile/' + this.props.username} style={{color: 'white'}}>
                                             Profile
                                     </Link>
                                     <Link className="nav-link" to="/" style={{color: 'white'}} onClick={this.logout}>

@@ -21,6 +21,19 @@ export default class LoginService {
         return user
     }
 
+    async getUser(username) {
+        var user = {}
+        let promise =
+            fetch(`http://localhost:8080/getUser/${username}`, {
+                method: 'GET',
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(gotUser => {user = gotUser})
+        await promise
+        return user
+    }
+
     async createAccount(account) {
         var result = true
         let promise = 

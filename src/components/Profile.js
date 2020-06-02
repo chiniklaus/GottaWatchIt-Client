@@ -1,5 +1,5 @@
 import React from 'react'
-import { MDBMask, MDBView, MDBIcon } from "mdbreact";
+import { MDBIcon } from "mdbreact";
 import {Button, Modal} from 'react-bootstrap'
 import AccountUpdateService from "../services/AccountUpdateService";
 import LoginService from "../services/LoginService";
@@ -22,7 +22,8 @@ class Profile
             showWarning: false,
             newUsername: '',
             newPassword: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            loggedIn: false
         }
         this.navigate = this.navigate.bind(this)
         this.getCurrentUser = this.getCurrentUser.bind(this)
@@ -34,14 +35,29 @@ class Profile
     }
 
     async getCurrentUser() {
-        var user = await this.loginService.currentUser()
-        if (user.id === -1) {
-            this.props.history.push('/login')
+        var owner = window.location.pathname.split('/')[2]
+        if (owner == this.props.username) {
+            var user = await this.loginService.currentUser()
+                this.setState({
+                    currentUser: user,
+                    likes: user.likeActions,
+                    favorite: user.favorite,
+                    loggedIn: true
+                })
+
+                var len = this.state.likes.length
+                if (this.state.favorite !== null) {
+                    var searchResult = await SearchService.getInstance().searchMovieByID(this.state.favorite.movie.imdbid)
+                    this.setState({favoriteMovieObject: searchResult})
+                }
         } else {
+            console.log('here')
+            var user = await this.loginService.getUser(owner)
             this.setState({
                 currentUser: user,
                 likes: user.likeActions,
-                favorite: user.favorite
+                favorite: user.favorite,
+                loggedIn: false
             })
 
             var len = this.state.likes.length

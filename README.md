@@ -27,12 +27,17 @@ have to import router in navbar, otherwise the link doesn't work
     <li> - [x] if liked movie does not have a poster, should do something</li>
     <li> - [x] user be able to change username</li>
     <li> - [x] different pages for search result</li>
-    <li> - [ ] comment timestamp</li>
-    <li> - [ ] thumbs up comment</li>
+    <li> - [x] comment timestamp</li>
+    <li> - [ ] changing profile route to username</li>
+    <li> - [ ] user be able to add friends</li>
+    <li> - [ ] user be able to upload profile picture</li>
+    <li> - [ ] user be able to search users in search bar</li>
+    <li> - [ ] user profile page display friends username/profile picture</li>
     <li> - [ ] some sort of recommendation on the home page</li>
     <li> - [ ] give user choices to personalize their profile page</li>
-    <li> - [ ] user be able to follow other users</li>
     <li> - [ ] recommendation portfolio editor</li>
     <li> - [ ] usesr be able to move liked movie around</li>
     <li> - [ ] all the buttons in moviedetail page take you to login if you are not logged in</li>
+    <li> - [ ] sorting comments by like or date</li>
+    <li> - [ ] thumbs up comment</li>
 </ul>

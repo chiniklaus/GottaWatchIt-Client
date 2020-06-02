@@ -19,7 +19,8 @@ export default class Homepage extends React.Component {
         this.state = {
             keyword: '',
             login: false,
-            update: false
+            username: ''
+            
         }
     }
 
@@ -32,7 +33,8 @@ export default class Homepage extends React.Component {
         .then(currentUser => {
             if (currentUser.id !== -1) {
                 this.setState({
-                    login: true
+                    login: true,
+                    username: currentUser.username
                 })
             }
         })
@@ -42,8 +44,9 @@ export default class Homepage extends React.Component {
         return(
             //<div style={{backgroundImage: 'url(images/1.jpg)' }}>
             <div>
+                {console.log(this.state)}
                 <Router>
-                    <Route path='/' render={() => <NavBar status={this.state.login} />} />
+                    <Route path='/' render={() => <NavBar status={this.state.login} username={this.state.username}/>} />
 
                     <Route exact path='/' render={() => 
                                 <MDBView hover>
@@ -58,7 +61,7 @@ export default class Homepage extends React.Component {
                                     </MDBMask>
                                 </MDBView>
                     } />
-                    
+
                     <Route exact path="/registerSuccessfulnotification" component={RegisterSuccessfulNotification}/>
 
                     <Route exact path="/registerFailed" component={RegisterFailedNotification}/>
@@ -71,13 +74,12 @@ export default class Homepage extends React.Component {
 
                     <Route exact path="/register" component={Register}/>
 
-                    <Route exact path="/profile" 
-                                    render={(props) => <Profile {...props} />}/>
-
                     <Route exact path="/searchResult/:keyword" component={SearchResult}/>
 
                     <Route exact path="/search/detail/:id" 
-                                    render={(props) => <MovieDetail {...props} />}/>
+                                    render={() => <MovieDetail />}/>
+                    
+                    <Route path="/profile/:username" render={() => <Profile username={this.state.username} />}/>
                
                 </Router>
             </div>
