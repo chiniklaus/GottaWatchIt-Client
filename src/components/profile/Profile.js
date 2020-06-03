@@ -28,7 +28,10 @@ class Profile
             loggedIn: false,
             tab: '',
             preview: null,
-            src: i
+            src: i,
+            valid: [],
+            req: [],
+            rec: []
         }
         this.navigate = this.navigate.bind(this)
         this.getCurrentUser = this.getCurrentUser.bind(this)
@@ -39,6 +42,8 @@ class Profile
         this.editAccount = this.editAccount.bind(this)
         this.onCrop = this.onCrop.bind(this)
         this.onClose = this.onClose.bind(this)
+        this.acceptFriend = this.acceptFriend.bind(this)
+        this.calculateFriends = this.calculateFriends.bind(this)
     }
 
     async getCurrentUser() {
@@ -72,6 +77,7 @@ class Profile
                 this.setState({favoriteMovieObject: searchResult})
             }
         }
+        this.calculateFriends()
     }
 
     navigate = (imdbid) => {
@@ -144,10 +150,39 @@ class Profile
         }
     }
 
+    async acceptFriend(usn) {
+        await this.accountUpdateService.acceptFriend(usn, this.state.currentUser.username);
+        this.getCurrentUser()
+    }
+
+    calculateFriends() {
+        var requested = this.state.currentUser.requested
+        var received = this.state.currentUser.received
+        var valid = []
+        var req = []
+        var rec = []
+        requested.forEach(element => {
+            if (element.valid == true) {
+                valid.push(element.receiverName)
+            } else {
+                req.push(element.receiverName)
+            }
+        });
+
+        received.forEach(element => {
+            if (element.valid == true) {
+                valid.push(element.requesterName)
+            } else {
+                rec.push(element.requesterName)
+            }
+        });
+
+        this.setState({valid: valid, req: req, rec: rec})
+    }
+
     render() {
         return (
             <div>
-                {console.log(this.state)}
                 <div className="container-fluid mt-5 mb-5">
                     <div className="row row-cols-3">
                         <div className="col"></div>
@@ -254,8 +289,10 @@ class Profile
                                     getCurrentUser={this.getCurrentUser}/>
                 }
                 {this.state.tab == 'friends' &&
-                    <Friends received={this.state.currentUser.received}
-                                requested={this.state.currentUser.requested}/>
+                    <Friends valid={this.state.valid}
+                                req={this.state.req}
+                                rec={this.state.rec}
+                                acceptFriend={this.acceptFriend}/>
                 }
             </div>
         )

@@ -1,45 +1,11 @@
 import React from 'react'
-import ProfileLikeMovie from "./ProfileLikeMovie";
-import ProfileFavoriteMovie from './ProfileFavoriteMovie'
+import FriendRequest from './FriendRequest'
+import { MDBRow } from 'mdbreact';
 
 class Friends
     extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            valid: [],
-            rec: [],
-            req: []
-        }
-    }
-
-    calculateFriends() {
-        var requested = this.props.requested
-        var received = this.props.received
-        var valid = []
-        var req = []
-        var rec = []
-        requested.forEach(element => {
-            if (element.valid == true) {
-                valid.push(element.receiverName)
-            } else {
-                req.push(element.receiverName)
-            }
-        });
-
-        received.forEach(element => {
-            if (element.valid == true) {
-                valid.push(element.requestedName)
-            } else {
-                rec.push(element.requestedName)
-            }
-        });
-
-        this.setState({valid: valid, req: req, rec: rec})
-    }
-
-    componentDidMount() {
-        this.calculateFriends()
     }
 
     render() {
@@ -50,15 +16,20 @@ class Friends
                         <h3 className="pl-3 pt-2">friend requests</h3>
                     </div>
                     <div className="row border-bottom pb-1">
-                        {                                    
-                           this.state.rec.map(
+                        <MDBRow>   
+                        {                                      
+                           this.props.rec.map(
                             re =>
-                                  <p className="mr-5">{re}</p>
+                                <FriendRequest info={re}
+                                                key={re}
+                                                acceptFriend={this.props.acceptFriend}
+                                                className="mr-5" />
                             )
                         }
+                        </MDBRow>
                         {
-                            this.state.rec.length == 0 &&
-                            <h4 className="pl-3 pt-2">
+                            this.props.rec.length == 0 &&
+                            <h4 className="pl-5 pt-2">
                                 <strong>
                                     you have no friend requests
                                 </strong>
@@ -71,9 +42,9 @@ class Friends
                     </div>
                     <div className="row border-bottom pl-3">
                         {                                    
-                           this.state.req.map(
+                           this.props.req.map(
                             re =>
-                                  <p className="mr-5">{re}</p>
+                                  <p key={re} className="mr-5">{re}</p>
                             )
                         }
                     </div>
@@ -83,9 +54,9 @@ class Friends
                     </div>
                     <div className="row border-bottom pl-3">
                         {                                    
-                           this.state.valid.map(
+                           this.props.valid.map(
                             re =>
-                                  <p className="mr-3">{re}</p>
+                                  <p key={re} className="mr-3">{re}</p>
                             )
                         }
                     </div>

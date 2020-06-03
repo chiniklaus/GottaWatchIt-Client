@@ -72,4 +72,15 @@ export default class AccountUpdateService {
         }).then(response => console.log(response))
         await promise
     }
+
+    async acceptFriend(username, musername) {
+        let promise = 
+            fetch(`http://localhost:8080/api/friendship/valid/${username}/${musername}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(response => console.log(response))
+        await promise
+    }
 }
