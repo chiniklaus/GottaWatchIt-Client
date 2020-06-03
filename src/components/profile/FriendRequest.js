@@ -9,13 +9,14 @@ class FriendRequest extends React.Component {
     render() {
         return (
             <MDBCol style={{ maxWidth: "20rem" }} className="p-3">
-                <MDBCard>
+                <MDBCard style={{
+                    display: 'flex',
+                    alignItems: 'center'}}>
                     <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
                     waves />
                     <MDBCardBody>
                     <MDBCardTitle className="text-center">{this.props.info}</MDBCardTitle>
-                    <MDBCardText>she a bitch</MDBCardText>
-                    <MDBBtn onClick={() => this.props.acceptFriend(this.props.info)}>Accept</MDBBtn>
+                    <MDBBtn className="text-center" onClick={() => this.props.acceptFriend(this.props.info)}>Accept</MDBBtn>
                     </MDBCardBody>
                 </MDBCard>
             </MDBCol>

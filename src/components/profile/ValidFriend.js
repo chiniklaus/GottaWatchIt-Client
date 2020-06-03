@@ -1,7 +1,7 @@
 import React from 'react'
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
 
-class SentRequest extends React.Component {
+class ValidFriend extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -16,7 +16,6 @@ class SentRequest extends React.Component {
                     waves />
                     <MDBCardBody>
                     <MDBCardTitle className="text-center">{this.props.info}</MDBCardTitle>
-                    <MDBBtn onClick={() => this.props.cancelRequest(this.props.info)}>Cancel Request</MDBBtn>
                     </MDBCardBody>
                 </MDBCard>
             </MDBCol>
@@ -24,4 +23,4 @@ class SentRequest extends React.Component {
     }
 }
 
-export default SentRequest;
+export default ValidFriend;

@@ -1,6 +1,7 @@
 import React from 'react'
 import FriendRequest from './FriendRequest'
 import SentRequest from './SentRequest'
+import ValidFriend from './ValidFriend'
 import { MDBRow } from 'mdbreact';
 
 class Friends
@@ -16,8 +17,7 @@ class Friends
                     <div className="row">
                         <h3 className="pl-3 pt-2">friend requests</h3>
                     </div>
-                    <div className="row border-bottom pb-1">
-                        <MDBRow>   
+                    <div className="row border-bottom pb-2 pl-3">  
                         {                                      
                            this.props.rec.map(
                             re =>
@@ -27,21 +27,12 @@ class Friends
                                                 className="mr-5" />
                             )
                         }
-                        </MDBRow>
-                        {
-                            this.props.rec.length == 0 &&
-                            <h4 className="pl-5 pt-2">
-                                <strong>
-                                    you have no friend requests
-                                </strong>
-                            </h4>
-                        }
                     </div>
 
                     <div className="row">
-                        <h3 className="pl-3 pt-2">sent requests</h3>    
+                        <h3 className="pl-3 pt-4">sent requests</h3>    
                     </div>
-                    <div className="row border-bottom pl-3">
+                    <div className="row border-bottom pb-2 pl-3">
                         {                                    
                            this.props.req.map(
                             re =>
@@ -54,13 +45,15 @@ class Friends
                     </div>
                     
                     <div className="row">
-                        <h3 className="pl-3 pt-2">friends</h3>
+                        <h3 className="pl-3 pt-4">friends</h3>
                     </div>
-                    <div className="row border-bottom pl-3">
+                    <div className="row border-bottom pb-2 pl-3">
                         {                                    
                            this.props.valid.map(
                             re =>
-                                  <p key={re} className="mr-3">{re}</p>
+                                <ValidFriend info={re} 
+                                                key={re}
+                                                className="mr-3"/>
                             )
                         }
                     </div>
