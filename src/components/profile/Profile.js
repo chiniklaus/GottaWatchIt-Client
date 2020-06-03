@@ -350,7 +350,8 @@ class Profile
                                 req={this.state.req}
                                 rec={this.state.rec}
                                 acceptFriend={this.acceptFriend}
-                                cancelRequest={this.cancelRequest}/>
+                                cancelRequest={this.cancelRequest}
+                                userType={this.state.userType}/>
                 }
             </div>
         )
