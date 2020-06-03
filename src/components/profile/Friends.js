@@ -24,6 +24,7 @@ class Friends
                                 <FriendRequest info={re}
                                                 key={re}
                                                 acceptFriend={this.props.acceptFriend}
+                                                navigateToUser={this.props.navigateToUser}
                                                 className="mr-5" />
                             )
                         }
@@ -39,6 +40,7 @@ class Friends
                                 <SentRequest info={re}
                                                 key={re}
                                                 cancelRequest={this.props.cancelRequest}
+                                                navigateToUser={this.props.navigateToUser}
                                                 className="mr-5" />
                             )
                         }
@@ -53,6 +55,7 @@ class Friends
                             re =>
                                 <ValidFriend info={re} 
                                                 key={re}
+                                                navigateToUser={this.props.navigateToUser}
                                                 className="mr-3"/>
                             )
                         }

@@ -34,6 +34,7 @@ class Profile
             rec: []
         }
         this.navigate = this.navigate.bind(this)
+        this.navigateToUser = this.navigateToUser.bind(this)
         this.getCurrentUser = this.getCurrentUser.bind(this)
         this.handleShow = this.handleShow.bind(this)
         this.handleClose = this.handleClose.bind(this)
@@ -83,6 +84,10 @@ class Profile
 
     navigate = (imdbid) => {
         this.props.history.push(`/search/detail/${imdbid}`)
+    }
+
+    navigateToUser = (username) => {
+        this.props.history.push(`/profile/${username}`)
     }
 
     componentDidMount() {
@@ -296,6 +301,7 @@ class Profile
                 }
                 {this.state.tab == 'friends' &&
                     <Friends valid={this.state.valid}
+                                navigateToUser={this.navigateToUser}
                                 req={this.state.req}
                                 rec={this.state.rec}
                                 acceptFriend={this.acceptFriend}

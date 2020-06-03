@@ -12,8 +12,10 @@ class ValidFriend extends React.Component {
                 <MDBCard style={{
                     display: 'flex',
                     alignItems: 'center'}}>
-                    <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
-                    waves />
+                    <img className="img-fluid" 
+                        src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
+                        onClick={() => this.props.navigateToUser(this.props.info)} 
+                        />
                     <MDBCardBody>
                     <MDBCardTitle className="text-center">{this.props.info}</MDBCardTitle>
                     </MDBCardBody>
