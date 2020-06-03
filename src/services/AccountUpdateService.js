@@ -83,4 +83,15 @@ export default class AccountUpdateService {
         }).then(response => console.log(response))
         await promise
     }
+
+    async cancelRequest(username, musername) {
+        let promise = 
+            fetch(`http://localhost:8080/api/friendship/delete/${musername}/${username}`, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(response => console.log(response))
+        await promise
+    }
 }

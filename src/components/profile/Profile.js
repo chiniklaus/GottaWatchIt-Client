@@ -43,6 +43,7 @@ class Profile
         this.onCrop = this.onCrop.bind(this)
         this.onClose = this.onClose.bind(this)
         this.acceptFriend = this.acceptFriend.bind(this)
+        this.cancelRequest = this.cancelRequest.bind(this)
         this.calculateFriends = this.calculateFriends.bind(this)
     }
 
@@ -152,6 +153,11 @@ class Profile
 
     async acceptFriend(usn) {
         await this.accountUpdateService.acceptFriend(usn, this.state.currentUser.username);
+        this.getCurrentUser()
+    }
+
+    async cancelRequest(usn) {
+        await this.accountUpdateService.cancelRequest(usn, this.state.currentUser.username);
         this.getCurrentUser()
     }
 
@@ -292,7 +298,8 @@ class Profile
                     <Friends valid={this.state.valid}
                                 req={this.state.req}
                                 rec={this.state.rec}
-                                acceptFriend={this.acceptFriend}/>
+                                acceptFriend={this.acceptFriend}
+                                cancelRequest={this.cancelRequest}/>
                 }
             </div>
         )

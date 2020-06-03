@@ -1,5 +1,6 @@
 import React from 'react'
 import FriendRequest from './FriendRequest'
+import SentRequest from './SentRequest'
 import { MDBRow } from 'mdbreact';
 
 class Friends
@@ -44,7 +45,10 @@ class Friends
                         {                                    
                            this.props.req.map(
                             re =>
-                                  <p key={re} className="mr-5">{re}</p>
+                                <SentRequest info={re}
+                                                key={re}
+                                                cancelRequest={this.props.cancelRequest}
+                                                className="mr-5" />
                             )
                         }
                     </div>

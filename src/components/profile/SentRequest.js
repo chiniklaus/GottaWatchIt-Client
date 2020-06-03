@@ -1,7 +1,7 @@
 import React from 'react'
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
 
-class FriendRequest extends React.Component {
+class SentRequest extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -15,7 +15,7 @@ class FriendRequest extends React.Component {
                     <MDBCardBody>
                     <MDBCardTitle className="text-center">{this.props.info}</MDBCardTitle>
                     <MDBCardText>she a bitch</MDBCardText>
-                    <MDBBtn onClick={() => this.props.acceptFriend(this.props.info)}>Accept</MDBBtn>
+                    <MDBBtn onClick={() => this.props.cancelRequest(this.props.info)}>Cancel Request</MDBBtn>
                     </MDBCardBody>
                 </MDBCard>
             </MDBCol>
@@ -23,4 +23,4 @@ class FriendRequest extends React.Component {
     }
 }
 
-export default FriendRequest;
+export default SentRequest;
