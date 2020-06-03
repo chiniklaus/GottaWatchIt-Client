@@ -94,4 +94,15 @@ export default class AccountUpdateService {
         }).then(response => console.log(response))
         await promise
     }
+
+    async sendRequest(uname1, uname2) {
+        let promise = 
+            fetch(`http://localhost:8080/api/friendship/${uname1}/${uname2}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(response => console.log(response))
+        await promise
+    }
 }

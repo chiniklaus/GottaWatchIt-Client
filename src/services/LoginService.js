@@ -85,4 +85,15 @@ export default class LoginService {
                 console.log(response)
             })
     }
+
+    async logout() {
+        let promise = 
+            fetch("http://localhost:8080/logout", {
+                method: 'POST',
+                credentials: 'include'
+            })
+            .then(response => {
+                console.log(response)
+            })
+    }
 }
