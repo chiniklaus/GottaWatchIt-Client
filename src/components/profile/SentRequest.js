@@ -22,11 +22,12 @@ class SentRequest extends React.Component {
 
     render() {
         return (
-            <MDBCol style={{ maxWidth: "20rem" }} className="p-3">
+            <MDBCol style={{ maxWidth: "20rem" }} className="col-3 p-3">
                 <MDBCard style={{
                     display: 'flex',
                     alignItems: 'center'}}>
                     <img className="img-fluid p-2" 
+                            style={{height: 200}}
                             src={'data:image/png;base64,' + this.state.src}
                             onClick={() => this.props.navigateToUser(this.props.info)} 
                             />
