@@ -22,9 +22,9 @@ class Edit extends React.Component {
                                 height={295}
                                 onCrop={this.props.onCrop}
                                 onClose={this.props.onClose}
-                                src={this.props.src}
+                                src={this.props.selectedFile}
                             />
-                            <img src={this.props.preview} alt="Preview" />
+                            <img src={this.props.preview} alt="Preview" style={{height: 100}}/>
                              <h5>New username:</h5>
                              <div className="form-group">
                                      <input className="form-control"

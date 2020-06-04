@@ -61,6 +61,15 @@ export default class AccountUpdateService {
         await promise
     }
 
+    async updateProfilePicture(username, data) {
+        let promise = 
+            fetch(`http://localhost:8080/api/accounts/image/${username}`, {
+            method: 'POST',
+            body: data
+        }).then(response => console.log(response))
+        await promise
+    }
+
     async updatePassword(password, oldUsername) {
         let promise = 
             fetch('http://localhost:8080/api/accounts/update/password', {

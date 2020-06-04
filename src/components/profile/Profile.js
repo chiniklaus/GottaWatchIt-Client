@@ -7,7 +7,6 @@ import ProfileMovies from "./ProfileMovies"
 import Edit from "./Edit"
 import Warning from "./Warning"
 import Friends from "./Friends"
-import i from '../../1.jpeg'
 
 class Profile
     extends React.Component {
@@ -28,7 +27,7 @@ class Profile
             loggedIn: false,
             tab: '',
             preview: null,
-            src: i,
+            selectedFile: null,
             valid: [],
             req: [],
             rec: [],
@@ -48,6 +47,8 @@ class Profile
         this.cancelRequest = this.cancelRequest.bind(this)
         this.calculateFriends = this.calculateFriends.bind(this)
         this.sendRequest = this.sendRequest.bind(this)
+        this.handleImageUpload = this.handleImageUpload.bind(this)
+
     }
 
     async getCurrentUser() {
@@ -118,14 +119,35 @@ class Profile
             this.handleClose()
             this.handleWarningShow()
         } else {
+            var change = false
             if (this.state.newPassword !== '') {
+                change = true
                 await this.accountUpdateService.updatePassword(this.state.newPassword, this.state.currentUser.username)
             }
             if (this.state.newUsername !== '') {
+                change = true
                 await this.accountUpdateService.updateUsername(this.state.newUsername, this.state.currentUser.username)
             }
-            await this.loginService.logout()
-            this.props.history.push('/login')
+            if (this.state.preview !== null) {
+                let data
+                await fetch(this.state.preview)
+                        .then(res => res.blob())
+                        .then(blob => {
+                        var fd = new FormData()
+                        fd.append('image', blob, 'file')
+                        data = fd
+                        console.log(blob)
+                        })
+                change = true
+                await this.accountUpdateService.updateProfilePicture(this.state.currentUser.username, data)
+            }
+
+            if (change) {
+                await this.loginService.logout()
+                this.props.history.push('/login')
+            } else {
+                this.handleClose()
+            }
         }
     }
 
@@ -239,11 +261,19 @@ class Profile
         this.setState({valid: valid, req: req, rec: rec})
     }
 
+    handleImageUpload(e) {
+        var im = e.target.files[0]
+        if(im) {
+            this.setState({selectedFile: im})
+            console.log(im)
+        }
+    }
+
     render() {
         return (
             <div>
                 <div className="container-fluid mt-5 mb-5">
-                    <div className="row row-cols-3">
+                    <div className="row row-cols-3 justify-content-center pt-3">
                         <div className="col"></div>
                         <div className="col">
                             <h1 className="text-center font-weight-bold"
@@ -303,9 +333,19 @@ class Profile
                         }
                     </div>
                     {this.state.currentUser.type === 'Admin' &&
+                    
                     <h5 className="text-center font-weight-light ">
                         {this.state.currentUser.type}
                     </h5>}
+                    <div className="row justify-content-center p-5 mt-2">
+                        <img src={`data:image/png;base64,${this.state.currentUser.profileImage}`} className="pr-5"/>
+                        <h4 className="font-weight-lighter font-italic pl-3" style={{
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}>
+                            "Tough, ain't enough."
+                        </h4>
+                    </div>
                 </div>
                 <div className="container">
                     <MDBNav className="nav-tabs nav-fill">
@@ -327,13 +367,15 @@ class Profile
                         handleClose={this.handleClose}
                         onCrop={this.onCrop}
                         onClose={this.onClose}
-                        src={this.state.src}
+                        selectedFile={this.state.selectedFile}
                         preview={this.state.preview}
                         setUsername={this.setUsername}
                         setPassword={this.setPassword}
                         confirmPassword={this.confirmPassword}
                         editAccount={this.editAccount}
+                        handleImageUpload={this.handleImageUpload}
                 />
+                {console.log(this.state)}
                 <Warning showWarning={this.state.showWarning}
                         handleWarningClose={this.handleWarningClose}
                 />
