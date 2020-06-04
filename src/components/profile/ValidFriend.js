@@ -4,6 +4,19 @@ import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, 
 class ValidFriend extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            src: ''
+        }
+        this.load = this.load.bind(this)
+    }
+
+    async load() {
+        var imgUser = await this.props.getPicture(this.props.info)
+        this.setState({src: imgUser.profileImage})
+    }
+
+    componentDidMount() {
+        this.load()
     }
 
     render() {
@@ -12,8 +25,8 @@ class ValidFriend extends React.Component {
                 <MDBCard style={{
                     display: 'flex',
                     alignItems: 'center'}}>
-                    <img className="img-fluid" 
-                        src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
+                    <img className="img-fluid p-2" 
+                        src={'data:image/png;base64,' + this.state.src}
                         onClick={() => this.props.navigateToUser(this.props.info)} 
                         />
                     <MDBCardBody>

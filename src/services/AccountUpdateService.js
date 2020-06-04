@@ -70,6 +70,17 @@ export default class AccountUpdateService {
         await promise
     }
 
+    async getProfilePicture(username) {
+        var imgUser
+        let promise = 
+            fetch(`http://localhost:8080/api/accounts/image/${username}`, {
+            method: 'GET',
+        }).then(response => response.json())
+            .then(i => {imgUser = i})
+        await promise
+        return imgUser
+    }
+
     async updatePassword(password, oldUsername) {
         let promise = 
             fetch('http://localhost:8080/api/accounts/update/password', {

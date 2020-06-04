@@ -195,6 +195,11 @@ class Profile
         this.getCurrentUser()
     }
 
+    async getPicture(username) {
+        let imgUser = await AccountUpdateService.getInstance().getProfilePicture(username)     
+        return imgUser
+    }
+
     calculateFriends() {
         var requested = this.state.currentUser.requested
         var received = this.state.currentUser.received
@@ -375,7 +380,6 @@ class Profile
                         editAccount={this.editAccount}
                         handleImageUpload={this.handleImageUpload}
                 />
-                {console.log(this.state)}
                 <Warning showWarning={this.state.showWarning}
                         handleWarningClose={this.handleWarningClose}
                 />
@@ -393,7 +397,8 @@ class Profile
                                 rec={this.state.rec}
                                 acceptFriend={this.acceptFriend}
                                 cancelRequest={this.cancelRequest}
-                                userType={this.state.userType}/>
+                                userType={this.state.userType}
+                                getPicture={this.getPicture}/>
                 }
             </div>
         )

@@ -29,10 +29,10 @@ have to import router in navbar, otherwise the link doesn't work
     <li> - [x] different pages for search result</li>
     <li> - [x] comment timestamp</li>
     <li> - [x] changing profile route to username</li>
-    <li> - [ ] user be able to add friends</li>
-    <li> - [ ] user be able to upload profile picture</li>
+    <li> - [x] user be able to add friends</li>
+    <li> - [x] user be able to upload profile picture</li>
     <li> - [x] user be able to search users in search bar</li>
-    <li> - [ ] user profile page display friends username/profile picture</li>
+    <li> - [x] user profile page display friends username/profile picture</li>
     <li> - [ ] some sort of recommendation on the home page</li>
     <li> - [ ] give user choices to personalize their profile page</li>
     <li> - [ ] recommendation portfolio editor</li>

@@ -26,6 +26,7 @@ class Friends
                                 re =>
                                     <FriendRequest info={re}
                                                     key={re}
+                                                    getPicture={this.props.getPicture}
                                                     acceptFriend={this.props.acceptFriend}
                                                     navigateToUser={this.props.navigateToUser}
                                                     className="mr-5" />
@@ -42,6 +43,7 @@ class Friends
                                 re =>
                                     <SentRequest info={re}
                                                     key={re}
+                                                    getPicture={this.props.getPicture}
                                                     cancelRequest={this.props.cancelRequest}
                                                     navigateToUser={this.props.navigateToUser}
                                                     className="mr-5" />
@@ -60,6 +62,7 @@ class Friends
                             re =>
                                 <ValidFriend info={re} 
                                                 key={re}
+                                                getPicture={this.props.getPicture}
                                                 navigateToUser={this.props.navigateToUser}
                                                 className="mr-3"/>
                             )
