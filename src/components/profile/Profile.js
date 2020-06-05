@@ -277,6 +277,7 @@ class Profile
     render() {
         return (
             <div>
+                {console.log(this.state)}
                 <div className="container-fluid mt-5 mb-5">
                     <div className="row row-cols-3 justify-content-center pt-3">
                         <div className="col"></div>
@@ -363,8 +364,8 @@ class Profile
                                         onClick={() => this.setState({tab: 'friends'})}><strong>Friends</strong></MDBNavLink>
                         </MDBNavItem>
                         <MDBNavItem>
-                            <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/activity'}
-                                        onClick={() => this.setState({tab: 'activity'})}><strong>Activities</strong></MDBNavLink>
+                            <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/recommendation'}
+                                        onClick={() => this.setState({tab: 'activity'})}><strong>recommendation</strong></MDBNavLink>
                         </MDBNavItem>
                     </MDBNav>
                 </div>

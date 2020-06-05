@@ -37,6 +37,7 @@ class MovieDetail
         this.rateMovie = this.rateMovie.bind(this)
         this.setRating = this.setRating.bind(this)
         this.setComment = this.setComment.bind(this)
+        this.navigateToUser = this.navigateToUser.bind(this)
     }
 
     async searchMovieByID(id) {
@@ -122,6 +123,10 @@ class MovieDetail
         }
     }
 
+    navigateToUser = (username) => {
+        this.props.history.push(`/profile/${username}`)
+    }
+
     componentDidUpdate(prevProps, prevState){
         if(prevState.myComment !== this.state.myComment && this.state.myComment === '') {
             var id = window.location.pathname.split('/')[3]
@@ -130,6 +135,11 @@ class MovieDetail
             var id = window.location.pathname.split('/')[3]
             this.searchMovieByID(id)
         }
+    }
+
+    async getPicture(username) {
+        let imgUser = await AccountUpdateService.getInstance().getProfilePicture(username)     
+        return imgUser
     }
 
     render() {
@@ -263,7 +273,12 @@ class MovieDetail
                             {                                    
                                 this.state.comments.map(
                                     comment =>
-                                            <Comment username={comment.userName} comment={comment.comment} date={comment.date} key={comment.id}/>
+                                            <Comment username={comment.userName}
+                                                        comment={comment.comment}
+                                                        date={comment.date}
+                                                        key={comment.id}
+                                                        getPicture={this.getPicture}
+                                                        navigateToUser={this.navigateToUser}/>
                             )}
                         </div>
                     </div>
