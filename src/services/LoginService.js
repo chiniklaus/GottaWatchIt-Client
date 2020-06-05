@@ -34,6 +34,19 @@ export default class LoginService {
         return user
     }
 
+    async getUserFriends() {
+        var userFriends = []
+        let promise =
+            fetch('http://localhost:8080/api/accounts/friends', {
+                method: 'GET',
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(gotUser => {userFriends = gotUser})
+        await promise
+        return userFriends
+    }
+
     async createAccount(account) {
         var result = true
         let promise = 

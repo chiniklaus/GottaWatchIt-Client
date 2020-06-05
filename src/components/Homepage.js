@@ -19,7 +19,8 @@ export default class Homepage extends React.Component {
         this.state = {
             keyword: '',
             login: false,
-            username: ''
+            username: '',
+            currentUser: {}
             
         }
     }
@@ -34,7 +35,8 @@ export default class Homepage extends React.Component {
             if (currentUser.id !== -1) {
                 this.setState({
                     login: true,
-                    username: currentUser.username
+                    username: currentUser.username,
+                    currentUser: currentUser
                 })
             }
         })
@@ -76,7 +78,7 @@ export default class Homepage extends React.Component {
                     <Route exact path="/searchResult/:keyword" component={SearchResult}/>
 
                     <Route exact path="/search/detail/:id" 
-                                    render={(props) => <MovieDetail {...props} />}/>
+                                    render={(props) => <MovieDetail {...props} username={this.state.username}/>}/>
                     
                     <Route path="/profile/:username" render={(props) => <Profile {...props} username={this.state.username} />}/>
                

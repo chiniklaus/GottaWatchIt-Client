@@ -1,8 +1,10 @@
 import React from 'react'
 import {Button, Modal} from 'react-bootstrap'
 import Comment from "./Comment";
+import RecommendationEditor from "./RecommendationEditor"
 import SearchService from "../../services/SearchService";
 import AccountUpdateService from "../../services/AccountUpdateService";
+import RecommendationService from "../../services/RecommendationService";
 import LoginService from "../../services/LoginService";
 import ActionService from "../../services/ActionService";
 import MovieService from "../../services/MovieService";
@@ -16,17 +18,20 @@ class MovieDetail
         this.accountUpdateService = AccountUpdateService.getInstance();
         this.actionService = ActionService.getInstance();
         this.movieService = MovieService.getInstance();
+        this.recommendationService = RecommendationService.getInstance();
         this.state = {
             movie: {},
             likeme: [],
             loveme: [],
             show: false,
             showRating: false,
-            showComment: false,
+            showEditor: false,
             myRating: '',
             myComment: '',
             averageRating: '',
-            comments: []
+            comments: [],
+            title: '',
+            words: ''
         }
         this.likeMovie = this.likeMovie.bind(this)
         this.selectFavoriteMovie = this.selectFavoriteMovie.bind(this)
@@ -38,6 +43,11 @@ class MovieDetail
         this.setRating = this.setRating.bind(this)
         this.setComment = this.setComment.bind(this)
         this.navigateToUser = this.navigateToUser.bind(this)
+        this.handleCloseEditor = this.handleCloseEditor.bind(this)
+        this.setTitle = this.setTitle.bind(this)
+        this.setWords = this.setWords.bind(this)
+        this.handleShowEditor = this.handleShowEditor.bind(this)
+        this.recordRecommendation = this.recordRecommendation.bind(this)
     }
 
     async searchMovieByID(id) {
@@ -95,8 +105,26 @@ class MovieDetail
     }
 
     handleClose = () => this.setState({show: false})
+
     handleShow() {
         this.setState({show: true})
+    }
+
+    handleShowEditor() {
+        this.setState({showEditor: true})
+    }
+
+    handleCloseEditor = () => this.setState({showEditor: false})
+
+    setTitle = (event) => {
+        const value = event.target.value
+        this.setState({title: value})
+        console.log(value)
+    }
+
+    setWords = (event) => {
+        const value = event.target.value
+        this.setState({words: value})
     }
 
     handleRatingClose = () => this.setState({showRating: false})
@@ -140,6 +168,18 @@ class MovieDetail
     async getPicture(username) {
         let imgUser = await AccountUpdateService.getInstance().getProfilePicture(username)     
         return imgUser
+    }
+
+    async getFriends() {
+        return await LoginService.getInstance().getUserFriends()
+    }
+
+    async recordRecommendation(to) {
+        await this.recommendationService.recordRecommendation(this.props.username,
+                                                                to,
+                                                                this.state.movie.imdbID,
+                                                                this.state.title, this.state.words)
+        this.handleCloseEditor()
     }
 
     render() {
@@ -193,14 +233,17 @@ class MovieDetail
                         </div>
                         <div>
                             <div className="row pt-4">
-                                <div className="col-4">
+                                <div className="col-3">
                                     <button type="button" className="btn btn-outline-primary btn-block" onClick={this.likeMovie}>Like this movie!</button>
                                 </div>
-                                <div className="col-4">
+                                <div className="col-3">
                                     <button type="button" className="btn btn-outline-danger btn-block" onClick={this.selectFavoriteMovie}>Select as favorite</button>
                                 </div>
-                                <div className="col-4">
+                                <div className="col-3">
                                     <button type="button" className="btn btn-outline-success btn-block" onClick={this.handleRatingShow}>Rate & comment!</button>
+                                </div>
+                                <div className="col-3">
+                                    <button type="button" className="btn btn-outline-success btn-block" onClick={this.handleShowEditor}>Recommend</button>
                                 </div>
                             </div>
                         </div>
@@ -264,6 +307,12 @@ class MovieDetail
                         </Button>
                         </Modal.Footer>
                     </Modal>
+                    <RecommendationEditor showEditor={this.state.showEditor}
+                                            handleCloseEditor={this.handleCloseEditor}
+                                            setTitle={this.setTitle}
+                                            setWords={this.setWords}
+                                            getFriends={this.getFriends}
+                                            recordRecommendation={this.recordRecommendation}/>
                 </div>
                 <div className="container row">
                     <div className="col-4"></div>

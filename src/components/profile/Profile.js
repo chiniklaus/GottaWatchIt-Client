@@ -365,7 +365,7 @@ class Profile
                         </MDBNavItem>
                         <MDBNavItem>
                             <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/recommendation'}
-                                        onClick={() => this.setState({tab: 'activity'})}><strong>recommendation</strong></MDBNavLink>
+                                        onClick={() => this.setState({tab: 'activity'})}><strong>Recommendations</strong></MDBNavLink>
                         </MDBNavItem>
                     </MDBNav>
                 </div>
