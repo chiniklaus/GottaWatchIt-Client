@@ -224,7 +224,7 @@ class MovieDetail
                                 {this.state.movie.Director}
                             </h5>
                             <h5>
-                                {'NU-Movies rating: '}
+                                {'GottaWatchIt! rating: '}
                                 {this.state.averageRating}
                                 {'/5'}
                             </h5>
