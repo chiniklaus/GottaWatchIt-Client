@@ -1,0 +1,29 @@
+.nav-container {
+    background-color: darkblue;
+    box-shadow: black;
+}
+
+.my-nav {
+    height: 100;
+    color: black;
+    background-color: darkblue;
+}
+
+.nav-item {
+    color: white;
+}
+
+.nav-item:hover {
+    color: red;
+}
+
+.title {
+    background-image: url(./1.png);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: 'no-repeat';
+}
+
+.little-title {
+    background-color: rgba(0, 0, 0, 0.7);
+}

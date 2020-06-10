@@ -21,6 +21,19 @@ export default class LoginService {
         return user
     }
 
+    async currentUsername() {
+        var user = {}
+        let promise =
+            fetch("http://localhost:8080/currentUsername", {
+                method: 'GET',
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(currentUser => {user = currentUser})
+        await promise
+        return user
+    }
+
     async getUser(username) {
         var user = {}
         let promise =

@@ -23,4 +23,16 @@ export default class MovieService {
         }).then(response => console.log(response))
         await promise
     }
+
+    async getMovie(imdbid) {
+        var m = {}
+        let promise =
+            fetch(`http://localhost:8080/api/movie/${imdbid}`, {
+                method: 'GET'
+            })
+            .then(response => response.json())
+            .then(response => {m = response})
+        await promise
+        return m
+    }
 }

@@ -233,16 +233,16 @@ class MovieDetail
                         </div>
                         <div>
                             <div className="row pt-4">
-                                <div className="col-3">
+                                <div className="col-6">
                                     <button type="button" className="btn btn-outline-primary btn-block" onClick={this.likeMovie}>Like this movie!</button>
                                 </div>
-                                <div className="col-3">
+                                <div className="col-6">
                                     <button type="button" className="btn btn-outline-danger btn-block" onClick={this.selectFavoriteMovie}>Select as favorite</button>
                                 </div>
-                                <div className="col-3">
+                                <div className="col-6 mt-2">
                                     <button type="button" className="btn btn-outline-success btn-block" onClick={this.handleRatingShow}>Rate & comment!</button>
                                 </div>
-                                <div className="col-3">
+                                <div className="col-6 mt-2">
                                     <button type="button" className="btn btn-outline-success btn-block" onClick={this.handleShowEditor}>Recommend</button>
                                 </div>
                             </div>

@@ -3,10 +3,13 @@ import { MDBNav, MDBNavItem, MDBNavLink, MDBIcon, MDBBtn } from "mdbreact";
 import AccountUpdateService from "../../services/AccountUpdateService";
 import LoginService from "../../services/LoginService";
 import SearchService from "../../services/SearchService";
+import RecommendationService from "../../services/RecommendationService";
 import ProfileMovies from "./ProfileMovies"
 import Edit from "./Edit"
 import Warning from "./Warning"
 import Friends from "./Friends"
+import Recommendations from "./Recommendations"
+import './style/Profile.css'
 
 class Profile
     extends React.Component {
@@ -14,6 +17,7 @@ class Profile
         super(props)
         this.loginService = LoginService.getInstance();
         this.accountUpdateService = AccountUpdateService.getInstance();
+        this.recommendationService = RecommendationService.getInstance();
         this.state = {
             currentUser: {},
             likes: [],
@@ -31,7 +35,9 @@ class Profile
             valid: [],
             req: [],
             rec: [],
-            userType: ''
+            userType: '',
+            recSent: [],
+            recReceived: []
         }
         this.navigate = this.navigate.bind(this)
         this.navigateToUser = this.navigateToUser.bind(this)
@@ -53,7 +59,8 @@ class Profile
 
     async getCurrentUser() {
         var owner = window.location.pathname.split('/')[2]
-        if (owner == this.props.username) {
+        var cusername = await this.loginService.currentUsername()
+        if (owner == cusername.username) {
             var user = await this.loginService.currentUser()
                 this.setState({
                     currentUser: user,
@@ -67,6 +74,8 @@ class Profile
                     var searchResult = await SearchService.getInstance().searchMovieByID(this.state.favorite.movie.imdbid)
                     this.setState({favoriteMovieObject: searchResult})
                 }
+                this.recommendationService.getRecommendationToMe(this.props.username).then(response => {this.setState({recReceived: response})})
+                this.recommendationService.getRecommendationISent(this.props.username).then(response => {this.setState({recSent: response})})
         } else {
             var user = await this.loginService.getUser(owner)
             this.setState({
@@ -278,24 +287,28 @@ class Profile
         return (
             <div>
                 {console.log(this.state)}
-                <div className="container-fluid mt-5 mb-5">
-                    <div className="row row-cols-3 justify-content-center pt-3">
-                        <div className="col"></div>
+                <div className="container mt-5 mb-2 title border rounded mb-3">
+                    <div className="row row-cols-3 pt-3 little-title">
                         <div className="col">
-                            <h1 className="text-center font-weight-bold"
-                                style={{backgroundColor: 'rgba(255,255,255,1)'}}>
+                            <div className="row p-5 mt-2">
+                                <img src={`data:image/png;base64,${this.state.currentUser.profileImage}`} />
+                            </div>
+                        </div>
+                        <div className="col" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                            <h1 className="font-weight-bold pt-3" 
+                                style={{color: 'white'}}>
                                 {this.state.currentUser.username}'s studio
                             </h1>
                         </div>
                         {
                             this.state.userType == 'owner' &&
-                            <div className="col">
+                            <div className="col pb-5" style={{display: 'flex', alignItems: 'center', color: 'white'}}>
                                 <MDBIcon icon="pencil-alt" size="lg" onClick={this.handleShow}/>
                             </div>
                         }
                         {
                             this.state.userType == 'stranger' &&
-                            <div className="col">
+                            <div className="col pt-3">
                                 <MDBBtn className="text-center" onClick={this.sendRequest}>
                                     Add friend
                                 </MDBBtn>
@@ -303,7 +316,7 @@ class Profile
                         }
                         {
                             this.state.userType == 'requester' &&
-                            <div className="col">
+                            <div className="col pt-3">
                                 <div className="container text-center rounded shadow-sm" style={{
                                     width: 350
                                     }}>
@@ -315,7 +328,7 @@ class Profile
                         }
                         {
                             this.state.userType == 'receiver' &&
-                            <div className="col">
+                            <div className="col pt-3">
                                 <div className="container text-center rounded shadow-sm" style={{
                                     width: 300
                                     }}>
@@ -327,7 +340,7 @@ class Profile
                         }
                         {
                             this.state.userType == 'friend' &&
-                            <div className="col">
+                            <div className="col pt-3">
                                 <div className="container text-center rounded shadow-sm" style={{
                                     width: 100
                                     }}>
@@ -338,34 +351,20 @@ class Profile
                             </div>
                         }
                     </div>
-                    {this.state.currentUser.type === 'Admin' &&
-                    
-                    <h5 className="text-center font-weight-light ">
-                        {this.state.currentUser.type}
-                    </h5>}
-                    <div className="row justify-content-center p-5 mt-2">
-                        <img src={`data:image/png;base64,${this.state.currentUser.profileImage}`} className="pr-5"/>
-                        <h4 className="font-weight-lighter font-italic pl-3" style={{
-                            display: 'flex',
-                            alignItems: 'center'
-                        }}>
-                            "Tough, ain't enough."
-                        </h4>
-                    </div>
                 </div>
-                <div className="container">
-                    <MDBNav className="nav-tabs nav-fill">
+                <div className="container rounded nav-container shadow-box-example z-depth-2" style={{height: 70, display: 'flex', alignItems: 'center'}}>
+                    <MDBNav className="nav-pills nav-justified my-nav">
                         <MDBNavItem>
                             <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/movies'}
-                                        onClick={() => this.setState({tab: 'movies'})}><strong>Movies</strong></MDBNavLink>
+                                        onClick={() => this.setState({tab: 'movies'})}><strong className='nav-item'>Movies</strong></MDBNavLink>
                         </MDBNavItem>
                         <MDBNavItem>
                             <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/friends'}
-                                        onClick={() => this.setState({tab: 'friends'})}><strong>Friends</strong></MDBNavLink>
+                                        onClick={() => this.setState({tab: 'friends'})}><strong className='nav-item'>Friends</strong></MDBNavLink>
                         </MDBNavItem>
                         <MDBNavItem>
-                            <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/recommendation'}
-                                        onClick={() => this.setState({tab: 'activity'})}><strong>Recommendations</strong></MDBNavLink>
+                            <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/recommendations'}
+                                        onClick={() => this.setState({tab: 'recommendations'})}><strong className='nav-item'>Recommendations</strong></MDBNavLink>
                         </MDBNavItem>
                     </MDBNav>
                 </div>
@@ -400,6 +399,11 @@ class Profile
                                 cancelRequest={this.cancelRequest}
                                 userType={this.state.userType}
                                 getPicture={this.getPicture}/>
+                }
+                {this.state.tab == 'recommendations' &&
+                    <Recommendations recSent={this.state.recSent}
+                                        recReceived={this.state.recReceived}
+                                        navigate={this.navigate}/>
                 }
             </div>
         )
