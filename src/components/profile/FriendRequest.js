@@ -1,6 +1,6 @@
 import React from 'react'
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol } from 'mdbreact';
-import AccountUpdateService from "../../services/AccountUpdateService";
+import "./style/Hover.css"
 
 class FriendRequest extends React.Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class FriendRequest extends React.Component {
                     alignItems: 'center'}}>
                     <img 
                         style={{height: 200}}
-                        className="img-fluid p-2" 
+                        className="img-fluid p-2 pointer" 
                         src={'data:image/png;base64,' + this.state.src}
                         onClick={() => this.props.navigateToUser(this.props.info)}
                         />

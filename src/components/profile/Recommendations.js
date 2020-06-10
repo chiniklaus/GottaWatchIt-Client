@@ -5,6 +5,27 @@ class Recommendations
     extends React.Component {
     constructor(props) {
         super(props)
+        this.deleteMyRec = this.deleteMyRec.bind(this)
+        this.deleteGetRec = this.deleteGetRec.bind(this)
+    }
+
+
+    async deleteMyRec(id) {
+        await fetch(`http://localhost:8080/api/recommendation/delete/from/${id}`, {
+            method: 'DELETE',
+        })
+        .then(response => console.log(response))
+
+        this.props.getCurrentUser()
+    }
+
+    async deleteGetRec(id) {
+        await fetch(`http://localhost:8080/api/recommendation/delete/to/${id}`, {
+            method: 'DELETE',
+        })
+        .then(response => console.log(response))
+
+        this.props.getCurrentUser()
     }
 
     render() {
@@ -19,10 +40,11 @@ class Recommendations
                             {                                      
                             this.props.recReceived.map(
                                 re =>
-                                    <Recommendation className="mr-5"
-                                                    re={re}
+                                    <Recommendation re={re}
                                                     key={re.id}
-                                                    navigate={this.props.navigate}/>
+                                                    navigate={this.props.navigate}
+                                                    delete={this.deleteGetRec}
+                                    />
                                 )
                             }
                         </div>
@@ -34,10 +56,10 @@ class Recommendations
                             {                                      
                             this.props.recSent.map(
                                 re =>
-                                    <Recommendation className="mr-5" 
-                                                    re={re}
+                                    <Recommendation re={re}
                                                     key={re.id}
                                                     navigate={this.props.navigate}
+                                                    delete={this.deleteMyRec}
                                     />
                                 )
                             }

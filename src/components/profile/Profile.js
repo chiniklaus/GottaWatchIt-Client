@@ -327,7 +327,7 @@ class Profile
                         }
                         {
                             this.state.userType == 'stranger' &&
-                            <div className="col pt-3">
+                            <div className="col pb-5" style={{display: 'flex', alignItems: 'center', color: 'white'}}>
                                 <MDBBtn className="text-center" onClick={this.sendRequest}>
                                     Add friend
                                 </MDBBtn>
@@ -335,7 +335,7 @@ class Profile
                         }
                         {
                             this.state.userType == 'requester' &&
-                            <div className="col pt-3">
+                            <div className="col pb-5" style={{display: 'flex', alignItems: 'center', color: 'white'}}>
                                 <div className="container text-center rounded shadow-sm" style={{
                                     width: 350
                                     }}>
@@ -347,7 +347,7 @@ class Profile
                         }
                         {
                             this.state.userType == 'receiver' &&
-                            <div className="col pt-3">
+                            <div className="col pb-5" style={{display: 'flex', alignItems: 'center', color: 'white'}}>
                                 <div className="container text-center rounded shadow-sm" style={{
                                     width: 300
                                     }}>
@@ -359,7 +359,7 @@ class Profile
                         }
                         {
                             this.state.userType == 'friend' &&
-                            <div className="col pt-3">
+                            <div className="col pb-5" style={{display: 'flex', alignItems: 'center', color: 'white'}}>
                                 <div className="container text-center rounded shadow-sm" style={{
                                     width: 100
                                     }}>
@@ -408,7 +408,8 @@ class Profile
                                     navigate={this.navigate} 
                                     favoriteMovieObject={this.state.favoriteMovieObject}
                                     likes={this.state.likes}
-                                    getCurrentUser={this.getCurrentUser}/>
+                                    getCurrentUser={this.getCurrentUser}
+                    />
                 }
                 {this.state.tab == 'friends' &&
                     <Friends valid={this.state.valid}
@@ -418,12 +419,15 @@ class Profile
                                 acceptFriend={this.acceptFriend}
                                 cancelRequest={this.cancelRequest}
                                 userType={this.state.userType}
-                                getPicture={this.getPicture}/>
+                                getPicture={this.getPicture}
+                    />
                 }
                 {this.state.tab == 'recommendations' &&
                     <Recommendations recSent={this.state.recSent}
                                         recReceived={this.state.recReceived}
-                                        navigate={this.navigate}/>
+                                        navigate={this.navigate}
+                                        getCurrentUser={this.getCurrentUser}
+                    />
                 }
             </div>
         )

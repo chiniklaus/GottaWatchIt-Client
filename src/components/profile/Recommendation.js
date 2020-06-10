@@ -23,7 +23,7 @@ class Recommendation extends React.Component {
 
     render() {
         return (
-            <div className="card" style={{backgroundColor: 'rgba(255,255,255,0.3)', width: 800}}>
+            <div className="card m-5" style={{backgroundColor: 'rgba(255,255,255,0.3)', width: 800}}>
                         <div className="row no-gutters">
                             <div>
                                 <img 
@@ -39,7 +39,7 @@ class Recommendation extends React.Component {
                                     <h5 className="ccard-subtitle pt-1">
                                         <stonrg>{this.props.re.words}</stonrg>
                                     </h5>
-                                    <MDBBtn className="text-center" onClick={() => this.props.acceptFriend(this.props.info)}>Accept</MDBBtn>
+                                    <MDBBtn className="text-center" onClick={() => this.props.delete(this.props.re.id)}>Remove</MDBBtn>
                                 </div>
                             </div>
                         </div>

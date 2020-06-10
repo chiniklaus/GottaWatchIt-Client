@@ -1,5 +1,6 @@
 import React from 'react'
-import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBCol } from 'mdbreact';
+import { MDBMask, MDBView, MDBIcon } from "mdbreact";
+import "./style/Hover.css"
 
 class ValidFriend extends React.Component {
     constructor(props) {
@@ -21,20 +22,19 @@ class ValidFriend extends React.Component {
 
     render() {
         return (
-            <MDBCol style={{ maxWidth: "20rem" }} className="col-3 p-3">
-                <MDBCard style={{
-                    display: 'flex',
-                    alignItems: 'center'}}>
+            <MDBView hover>
                     <img className="img-fluid p-2"
                         style={{height: 200}}
                         src={'data:image/png;base64,' + this.state.src}
-                        onClick={() => this.props.navigateToUser(this.props.info)} 
-                        />
-                    <MDBCardBody>
-                    <MDBCardTitle className="text-center">{this.props.info}</MDBCardTitle>
-                    </MDBCardBody>
-                </MDBCard>
-            </MDBCol>
+                    />
+                    <MDBMask className="flex-center pointer"
+                                overlay="white-strong"
+                                onClick={() => this.props.navigateToUser(this.props.info)} >
+                        <div className="container-fluid">
+                            <h3 className="text-center"><strong>{this.props.info}</strong></h3>
+                        </div>
+                    </MDBMask>
+            </MDBView>
         )
     }
 }

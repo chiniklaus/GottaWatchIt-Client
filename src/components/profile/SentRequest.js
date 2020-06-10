@@ -1,4 +1,5 @@
 import React from 'react'
+import "./style/Hover.css"
 import { MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol } from 'mdbreact';
 
 class SentRequest extends React.Component {
@@ -26,7 +27,7 @@ class SentRequest extends React.Component {
                 <MDBCard style={{
                     display: 'flex',
                     alignItems: 'center'}}>
-                    <img className="img-fluid p-2" 
+                    <img className="img-fluid p-2 pointer" 
                             style={{height: 200}}
                             src={'data:image/png;base64,' + this.state.src}
                             onClick={() => this.props.navigateToUser(this.props.info)} 
