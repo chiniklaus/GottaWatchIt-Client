@@ -38,8 +38,8 @@ have to import router in navbar, otherwise the link doesn't work
     <li> - [x] user upload background image</li>
     <li> - [x] style edit account</li>
     <li> - [x] style friends tab</li>
-    <li> - [ ] style recommendations</li>
-    <li> - [ ] when go to new page, default movie tab</li>
+    <li> - [x] style recommendations</li>
+    <li> - [x] when go to new page, default movie tab</li>
     <li> - [ ] all the buttons in moviedetail page take you to login if you are not logged in</li>
     <li> - [ ] style everything</li>
 </ul>

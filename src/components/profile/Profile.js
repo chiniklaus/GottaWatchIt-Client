@@ -82,7 +82,8 @@ class Profile
                 currentUser: user,
                 likes: user.likeActions,
                 favorite: user.favorite,
-                loggedIn: false
+                loggedIn: false,
+                tab: 'movies'
             })
 
             var len = this.state.likes.length
@@ -104,6 +105,7 @@ class Profile
 
     componentDidMount() {
         this.getCurrentUser()
+        this.setState({tab: 'movies'})
     }
 
     handleClose = () => this.setState({show: false})
@@ -381,10 +383,13 @@ class Profile
                             <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/friends'}
                                         onClick={() => this.setState({tab: 'friends'})}><strong className='nav-item'>Friends</strong></MDBNavLink>
                         </MDBNavItem>
-                        <MDBNavItem>
-                            <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/recommendations'}
-                                        onClick={() => this.setState({tab: 'recommendations'})}><strong className='nav-item'>Recommendations</strong></MDBNavLink>
-                        </MDBNavItem>
+                        {
+                            this.state.currentUser.username === this.props.username &&
+                            <MDBNavItem>
+                                <MDBNavLink to={'/profile/' + this.state.currentUser.username + '/recommendations'}
+                                            onClick={() => this.setState({tab: 'recommendations'})}><strong className='nav-item'>Recommendations</strong></MDBNavLink>
+                            </MDBNavItem>
+                        }
                     </MDBNav>
                 </div>
                 <Edit show={this.state.show}
