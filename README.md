@@ -1,4 +1,4 @@
-server code: https://github.com/chiniklaus/NU-Movies-Server
+server code: https://github.com/chiniklaus/GottaWatchIt-Server
 
 have to import router in navbar, otherwise the link doesn't work
 
