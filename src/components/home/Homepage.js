@@ -78,7 +78,7 @@ export default class Homepage extends React.Component {
                     <Route exact path="/search/detail/:id" 
                                     render={(props) => <MovieDetail {...props} username={this.state.username}/>}/>
                     
-                    <Route path="/profile/:username" render={(props) => <Profile {...props} username={this.state.username} />}/>
+                    <Route path="/profile/:username" render={(props) => <Profile {...props} username={this.state.username} login={this.state.login}/>}/>
                
                 </Router>
             </div>

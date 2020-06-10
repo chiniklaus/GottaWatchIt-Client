@@ -40,6 +40,7 @@ have to import router in navbar, otherwise the link doesn't work
     <li> - [x] style friends tab</li>
     <li> - [x] style recommendations</li>
     <li> - [x] when go to new page, default movie tab</li>
-    <li> - [ ] all the buttons in moviedetail page take you to login if you are not logged in</li>
+    <li> - [x] all the buttons in moviedetail page take you to login if you are not logged in</li>
+    <li> - [ ] recommendation get from server should be sorted by id, and remove duplicates</li>
     <li> - [ ] style everything</li>
 </ul>

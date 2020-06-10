@@ -60,21 +60,29 @@ class MovieDetail
     }
 
     async likeMovie() {
-        await this.accountUpdateService.likeMovie(
-            this.state.movie.imdbID,
-            this.state.movie.Title,
-            this.state.currentUser.id,
-            this.state.currentUser.username)
-        this.handleShow()
+        if (!this.props.login) {
+            this.props.history.push('/login')
+        } else {
+            await this.accountUpdateService.likeMovie(
+                this.state.movie.imdbID,
+                this.state.movie.Title,
+                this.state.currentUser.id,
+                this.state.currentUser.username)
+            this.handleShow()
+        }
     }
 
     async selectFavoriteMovie() {
-        await AccountUpdateService.getInstance().selectFavoriteMovie(
-            this.state.movie.imdbID,
-            this.state.movie.Title,
-            this.state.currentUser.id,
-            this.state.currentUser.username)
-        this.handleShow()
+        if (!this.props.login) {
+            this.props.history.push('/login')
+        } else {
+            await AccountUpdateService.getInstance().selectFavoriteMovie(
+                this.state.movie.imdbID,
+                this.state.movie.Title,
+                this.state.currentUser.id,
+                this.state.currentUser.username)
+            this.handleShow()
+        }
     }
 
     async rateMovie() {
@@ -111,7 +119,11 @@ class MovieDetail
     }
 
     handleShowEditor() {
-        this.setState({showEditor: true})
+        if (!this.props.login) {
+            this.props.history.push('/login')
+        } else {
+            this.setState({showEditor: true})
+        }
     }
 
     handleCloseEditor = () => this.setState({showEditor: false})
@@ -129,7 +141,11 @@ class MovieDetail
 
     handleRatingClose = () => this.setState({showRating: false})
     handleRatingShow() {
-        this.setState({showRating: true})
+        if (!this.props.login) {
+            this.props.history.push('/login')
+        } else {
+            this.setState({showRating: true})
+        }
     }
 
     setRating = (event) => {
