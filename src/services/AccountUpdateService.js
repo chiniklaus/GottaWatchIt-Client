@@ -70,6 +70,15 @@ export default class AccountUpdateService {
         await promise
     }
 
+    async updateBackgroundPicture(username, data) {
+        let promise = 
+            fetch(`http://localhost:8080/api/accounts/bgImage/${username}`, {
+            method: 'POST',
+            body: data
+        }).then(response => console.log(response))
+        await promise
+    }
+
     async getProfilePicture(username) {
         var imgUser
         let promise = 

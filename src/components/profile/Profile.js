@@ -32,6 +32,7 @@ class Profile
             tab: '',
             preview: null,
             selectedFile: null,
+            selectedBg: null,
             valid: [],
             req: [],
             rec: [],
@@ -53,8 +54,7 @@ class Profile
         this.cancelRequest = this.cancelRequest.bind(this)
         this.calculateFriends = this.calculateFriends.bind(this)
         this.sendRequest = this.sendRequest.bind(this)
-        this.handleImageUpload = this.handleImageUpload.bind(this)
-
+        this.fileChangedHandler = this.fileChangedHandler.bind(this)
     }
 
     async getCurrentUser() {
@@ -138,6 +138,7 @@ class Profile
                 await this.accountUpdateService.updateUsername(this.state.newUsername, this.state.currentUser.username)
             }
             if (this.state.preview !== null) {
+                console.log(this.state.preview)
                 let data
                 await fetch(this.state.preview)
                         .then(res => res.blob())
@@ -149,6 +150,20 @@ class Profile
                         })
                 change = true
                 await this.accountUpdateService.updateProfilePicture(this.state.currentUser.username, data)
+            }
+            if (this.state.selectedBg !== null) {
+                console.log('here')
+                let data
+                await fetch(this.state.selectedBg)
+                        .then(res => res.blob())
+                        .then(blob => {
+                            var fd = new FormData()
+                            fd.append('image', blob, 'file')
+                            data = fd
+                            console.log(blob)
+                        })
+                change = true
+                await this.accountUpdateService.updateBackgroundPicture(this.state.currentUser.username, data)
             }
 
             if (change) {
@@ -275,22 +290,26 @@ class Profile
         this.setState({valid: valid, req: req, rec: rec})
     }
 
-    handleImageUpload(e) {
-        var im = e.target.files[0]
-        if(im) {
-            this.setState({selectedFile: im})
-            console.log(im)
-        }
+    async fileChangedHandler(event) {
+        const reader = new FileReader();
+        const file = event.target.files[0]
+        reader.readAsDataURL(file);
+        reader.onloadend = function (e) {
+            this.setState({
+                selectedBg: [reader.result]
+            })
+          }.bind(this);
     }
 
     render() {
         return (
             <div>
-                {console.log(this.state)}
-                <div className="container mt-5 mb-2 title border rounded mb-3">
+                <div className="container mt-5 mb-2 title border rounded mb-3" style={{
+                        backgroundImage: 'url('+ `data:image/png;base64,${this.state.currentUser.backgroundImage}` + ')',
+                }}>
                     <div className="row row-cols-3 pt-3 little-title">
                         <div className="col">
-                            <div className="row p-5 mt-2">
+                            <div className="row p-5 m-2">
                                 <img src={`data:image/png;base64,${this.state.currentUser.profileImage}`} />
                             </div>
                         </div>
@@ -373,12 +392,13 @@ class Profile
                         onCrop={this.onCrop}
                         onClose={this.onClose}
                         selectedFile={this.state.selectedFile}
+                        selectedBg={this.state.selectedBg}
                         preview={this.state.preview}
                         setUsername={this.setUsername}
                         setPassword={this.setPassword}
                         confirmPassword={this.confirmPassword}
                         editAccount={this.editAccount}
-                        handleImageUpload={this.handleImageUpload}
+                        fileChangedHandler={this.fileChangedHandler}
                 />
                 <Warning showWarning={this.state.showWarning}
                         handleWarningClose={this.handleWarningClose}

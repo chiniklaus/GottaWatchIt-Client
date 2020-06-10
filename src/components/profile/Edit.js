@@ -14,17 +14,38 @@ class Edit extends React.Component {
                              onHide={this.props.handleClose} 
                              aria-labelledby="contained-modal-title-vcenter" centered>
                          <Modal.Header closeButton>
-                         <Modal.Title>Update your account</Modal.Title>
+                         <Modal.Title>Update your account (leave blank to keep old info)</Modal.Title>
                          </Modal.Header>
                          <Modal.Body>
-                            <Avatar
-                                width={390}
-                                height={295}
-                                onCrop={this.props.onCrop}
-                                onClose={this.props.onClose}
-                                src={this.props.selectedFile}
-                            />
-                            <img src={this.props.preview} alt="Preview" style={{height: 100}}/>
+                            <h5>New profile picture:</h5>
+                            <div className="row mb-3">
+                                <div className="col-6 ml-5">
+                                    <Avatar
+                                        width={290}
+                                        height={195}
+                                        onCrop={this.props.onCrop}
+                                        onClose={this.props.onClose}
+                                        src={this.props.selectedFile}
+                                    />
+                                </div>
+                                <div className="col-4" style={{display: 'flex', alignItems: 'center'}}>
+                                    {
+                                        this.props.preview !== null &&
+                                        <div className="row" style={{display: 'flex', alignItems: 'center'}}>
+                                            <p className="pr-3"><strong>preview:{' '}</strong></p>
+                                            <img src={this.props.preview} alt="Preview" style={{height: 100}}/>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <h5>New background picture:</h5>
+                            <div className="ml-5 mb-3">
+                                <input type="file" onChange={this.props.fileChangedHandler} />
+                                {
+                                    this.props.selectedBg !== null &&
+                                    <img src={this.props.selectedBg} alt="Preview" style={{height: 200}}/>
+                                }
+                            </div>
                              <h5>New username:</h5>
                              <div className="form-group">
                                      <input className="form-control"
@@ -33,7 +54,6 @@ class Edit extends React.Component {
                                     onChange={e => this.props.setUsername(e)}/>
                              </div>
                              <h5>New password:</h5>
-                             <h5>(leave this blank to keep old password)</h5>
                              <div className="form-group">
                                      <input 
                                      type="password"
