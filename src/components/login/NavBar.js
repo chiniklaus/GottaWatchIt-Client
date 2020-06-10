@@ -27,7 +27,7 @@ export default class NavBar extends React.Component {
                 <Navbar bg="dark" expand="lg">
                     <Navbar.Brand style={{color: 'red'}}>
                         <Link to="/" style={{color: 'red'}}>
-                                NU-Movies
+                                GottaWatchIt!
                         </Link>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav"/>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { MDBMask, MDBView, MDBIcon } from "mdbreact";
+import "../profile/style/Hover.css"
 
 class RecPoster extends React.Component {
     constructor(props) {
@@ -28,14 +29,11 @@ class RecPoster extends React.Component {
                             alt=""
                         />
                     }
-                    <MDBMask className="flex-center" overlay="black-strong">
+                    <MDBMask className="flex-center pointer" 
+                                overlay="black-strong" 
+                                onClick={() => this.props.navigate(this.props.rec.imdbid)}>
                         <div className="container-fluid">
                             <p className="white-text text-center">{this.state.posterMovie.name}</p>
-                            <p className="white-text text-center">
-                                <MDBIcon far icon="arrow-alt-circle-right"
-                                                className="align-bottom white-text"
-                                                onClick={() => this.props.navigate(this.props.rec.imdbid)}/>
-                            </p>
                         </div>
                     </MDBMask>
                     

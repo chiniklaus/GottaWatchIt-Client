@@ -41,6 +41,6 @@ have to import router in navbar, otherwise the link doesn't work
     <li> - [x] style recommendations</li>
     <li> - [x] when go to new page, default movie tab</li>
     <li> - [x] all the buttons in moviedetail page take you to login if you are not logged in</li>
-    <li> - [ ] recommendation get from server should be sorted by id, and remove duplicates</li>
-    <li> - [ ] style everything</li>
+    <li> - [x] recommendation get from server should be sorted by id, and remove duplicates</li>
+    <li> - [x] style everything</li>
 </ul>

@@ -55,96 +55,94 @@ class Register
 
     render() {
         return (
-            <div>
-                <div className="container">
-                <div className="row">
-                    <h1>Sign Up</h1>
-                </div>
+                <div className="container mt-5">
+                    <div className="row">
+                        <h1>Sign Up</h1>
+                    </div>
 
-                <form>
-                    <div className="form-group row">
-                        <label htmlFor="usernameFld"
-                               className="username col-sm-2 col-form-label">
-                            Username
-                        </label>
-                        <div className="col-sm-8">
-                            <input className="form-control"
-                                   id="usernameFld"
-                                   placeholder="username"
-                                   onChange={this.usernameChanged}/>
+                    <form>
+                        <div className="form-group row">
+                            <label htmlFor="usernameFld"
+                                className="username col-sm-2 col-form-label">
+                                Username
+                            </label>
+                            <div className="col-sm-8 pt-2">
+                                <input className="form-control"
+                                    id="usernameFld"
+                                    placeholder="username"
+                                    onChange={this.usernameChanged}/>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="form-group row">
-                        <label htmlFor="passwordFld" className="password col-sm-2 col-form-label">
-                            Password
-                        </label>
-                        <div className="col-sm-8">
-                            <input type="password"
-                                   className="form-control wbdv-password-fld"
-                                   id="passwordFld"
-                                   placeholder="password123"
-                                   onChange={this.passwordChanged}/>
+                        <div className="form-group row">
+                            <label htmlFor="passwordFld" className="password col-sm-2 col-form-label">
+                                Password
+                            </label>
+                            <div className="col-sm-8 pt-2">
+                                <input type="password"
+                                    className="form-control wbdv-password-fld"
+                                    id="passwordFld"
+                                    placeholder="password123"
+                                    onChange={this.passwordChanged}/>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="form-group row">
-                        <label htmlFor="verifyPasswordFld" className="password2 col-sm-2 col-form-label">
-                            Verify Password
-                        </label>
-                        <div className="col-sm-8">
-                            <input type="password"
-                                   className="form-control wbdv-password-fld"
-                                   id="verifyPasswordFld"
-                                   placeholder="password123"
-                                   onChange={this.verifyPasswordChanged}/>
+                        <div className="form-group row">
+                            <label htmlFor="verifyPasswordFld" className="password2 col-sm-2 col-form-label">
+                                Verify Password
+                            </label>
+                            <div className="col-sm-8 pt-2">
+                                <input type="password"
+                                    className="form-control wbdv-password-fld"
+                                    id="verifyPasswordFld"
+                                    placeholder="password123"
+                                    onChange={this.verifyPasswordChanged}/>
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="form-group row">
-                        <label htmlFor="userType" className="userType col-sm-2 col-form-label">
-                            User Type
-                        </label>
+                        <div className="form-group row">
+                            <label htmlFor="userType" className="userType col-sm-2 col-form-label">
+                                User Type
+                            </label>
 
-                        <label className="col-5">
-                            <input name="a"
-                                   type="radio"
-                                   onClick={this.usertypeChanged}
-                                   value="Regular"/>
-                                   Regular User
-                        </label>
+                            <label className="col-5 pt-2">
+                                <input name="a"
+                                    type="radio"
+                                    onClick={this.usertypeChanged}
+                                    value="Regular"/>
+                                    Regular User
+                            </label>
 
-                        <label className="col-4 float-right">
-                            <input name="a"
-                                   type="radio"
-                                   onClick={this.usertypeChanged}
-                                   value="Admin"/>
-                                   Admin User
-                        </label>
+                            <label className="col-4 float-right">
+                                <input name="a"
+                                    type="radio"
+                                    onClick={this.usertypeChanged}
+                                    value="Admin"/>
+                                    Admin User
+                            </label>
 
-                    </div>
+                        </div>
 
-                    <div className="form-group row">
-                        <label className="col-sm-2 col-form-label"/>
-                        <div className="col-sm-8">
-                            <Button id="registerBtn"
-                                    className="btn btn-primary btn-block"
-                                    onClick={this.createUser}
-                                    style={{color: 'white'}}>
-                                    Sign up
-                            </Button>
-                            <div className="row">
-                                <div className="col-6">
-                                    <Link to="/login">
-                                        Log in
-                                    </Link>
+                        <div className="form-group row">
+                            <label className="col-sm-2 col-form-label"/>
+                            <div className="col-sm-8">
+                                <Button id="registerBtn"
+                                        className="btn btn-primary btn-block"
+                                        onClick={this.createUser}
+                                        style={{color: 'white'}}>
+                                        Sign up
+                                </Button>
+                                <div className="row">
+                                    <div className="col-6">
+                                        <Link to="/login">
+                                            Log in
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-            </div>
-            </div>
+                    </form>
+                </div>
         )
     }
 }

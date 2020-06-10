@@ -54,6 +54,7 @@ export default class Homepage extends React.Component {
     render() {
         return(
             <div>
+                {console.log(this.state)}
                 <Router>
                     <Route path='/' render={() => <NavBar status={this.state.login} username={this.state.username}/>} />
 
@@ -76,9 +77,9 @@ export default class Homepage extends React.Component {
                     <Route exact path="/searchResult/:keyword" component={SearchResult}/>
 
                     <Route exact path="/search/detail/:id" 
-                                    render={(props) => <MovieDetail {...props} username={this.state.username}/>}/>
+                                    render={(props) => <MovieDetail {...props} username={this.state.username} login={this.state.login}/>}/>
                     
-                    <Route path="/profile/:username" render={(props) => <Profile {...props} username={this.state.username} login={this.state.login}/>}/>
+                    <Route path="/profile/:username" render={(props) => <Profile {...props} username={this.state.username}/>}/>
                
                 </Router>
             </div>

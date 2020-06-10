@@ -39,23 +39,9 @@ class Login
     render() {
         return (
             <div>
-                <div className="container">
-                <div className="row" style={{color: 'white'}}>
-                    row
-                </div>
-                <div className="row" style={{color: 'white'}}>
-                    row
-                </div>
-                <div className="row" style={{color: 'white'}}>
-                    row
-                </div>
-                <div className="row" style={{color: 'white'}}>
-                    row
-                </div>
+                <div className="container mt-5">
                 <h1>Sign In</h1>
-
                 <form>
-
                     <div className="form-group row username">
                         <label htmlFor="username" onChange={this.keywordChanged} className="col-sm-2 col-form-label">
                             Username
@@ -75,7 +61,7 @@ class Login
                         <label htmlFor="password" className="col-sm-2 col-form-label">
                             Password
                         </label>
-                        <div className="col-sm-8">
+                        <div className="col-sm-8 pt-2">
                             <input type="password"
                                    className="form-control wbdv-password-fld"
                                    id="password"
@@ -85,7 +71,7 @@ class Login
                     </div>
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label"/>
-                        <div className="col-sm-8">
+                        <div className="col-sm-8 pt-2">
                             <Button className="btn-primary btn-block btn-signIn"
                                     onClick={this.verifyUser}>
                                 Sign In
