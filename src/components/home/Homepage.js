@@ -1,17 +1,16 @@
 import React from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import SearchResult from "./search/SearchResult";
-import MovieDetail from "./movie/MovieDetail";
-import Login from "./login/Login";
-import Register from "./login/Register";
-import RegisterSuccessfulNotification from "./login/RegisterSuccessfulNotification";
-import LoginFailed from "./login/LoginFailed";
-import RegisterFailedNotification from "./login/RegisterFailedNotification";
-import UserAlreadyExist from "./login/UserAlreadyExist";
-import Profile from "./profile/Profile";
-import NavBar from "./login/NavBar"
-import bgv from '../1.mp4';
-import { MDBMask, MDBView } from "mdbreact";
+import SearchResult from "../search/SearchResult";
+import MovieDetail from "../movie/MovieDetail";
+import Login from "../login/Login";
+import Register from "../login/Register";
+import RegisterSuccessfulNotification from "../login/RegisterSuccessfulNotification";
+import LoginFailed from "../login/LoginFailed";
+import RegisterFailedNotification from "../login/RegisterFailedNotification";
+import UserAlreadyExist from "../login/UserAlreadyExist";
+import Profile from "../profile/Profile";
+import NavBar from "../login/NavBar"
+import HomepageRecommendations from "./HomepageRecommendations"
 
 export default class Homepage extends React.Component {
     constructor(props) {
@@ -20,8 +19,8 @@ export default class Homepage extends React.Component {
             keyword: '',
             login: false,
             username: '',
-            currentUser: {}
-            
+            currentUser: {},
+            recs: []
         }
     }
 
@@ -40,27 +39,26 @@ export default class Homepage extends React.Component {
                 })
             }
         })
+
+        fetch("http://localhost:8080/api/recommendation/all", {
+            method: 'GET',
+        })
+        .then(response => response.json())
+        .then(recs => {
+            this.setState({
+                recs: recs
+            })
+        })
     }
 
     render() {
         return(
-            //<div style={{backgroundImage: 'url(images/1.jpg)' }}>
             <div>
                 <Router>
                     <Route path='/' render={() => <NavBar status={this.state.login} username={this.state.username}/>} />
 
-                    <Route exact path='/' render={() => 
-                                <MDBView hover>
-                                    <video autoPlay muted loop>
-                                        <source src={bgv} type="video/mp4"/>
-                                        <h1>marvel sucks!</h1>
-                                    </video>
-                                    <MDBMask className="flex-center" overlay="black-strong">
-                                        <p className="yellow-text text-center" style={{fontSize: 100}}>
-                                            Marvel Sucks, DC is the best
-                                        </p>
-                                    </MDBMask>
-                                </MDBView>
+                    <Route exact path='/' render={(props) => 
+                                <HomepageRecommendations {...props} recs={this.state.recs} navigate={this.navigate}/>
                     } />
 
                     <Route exact path="/registerSuccessfulnotification" component={RegisterSuccessfulNotification}/>

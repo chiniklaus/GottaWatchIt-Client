@@ -34,7 +34,7 @@ have to import router in navbar, otherwise the link doesn't work
     <li> - [x] user be able to search users in search bar</li>
     <li> - [x] user profile page display friends username/profile picture</li>
     <li> - [x] recommendation portfolio editor</li>
-    <li> - [ ] some sort of recommendation on the home page</li>
+    <li> - [x] some sort of recommendation on the home page</li>
     <li> - [ ] style edit account</li>
     <li> - [ ] all the buttons in moviedetail page take you to login if you are not logged in</li>
     <li> - [ ] style everything</li>
