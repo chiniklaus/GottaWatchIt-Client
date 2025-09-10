@@ -17,7 +17,7 @@
     "react-image": "^3.0.3",
     "react-image-magnify": "^2.7.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.1"
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
